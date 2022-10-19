@@ -4,7 +4,7 @@ import { Header } from './Header'
 
 export function MainLayout({ children }) {
   return (
-    <Box height="100vh">
+    <Box minHeight="100vh">
       <Header />
       <Box>{children}</Box>
     </Box>
