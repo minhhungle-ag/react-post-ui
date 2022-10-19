@@ -10,8 +10,6 @@ export function BlogDetail() {
   const { postId } = useParams()
   const { post, isLoading } = usePost(postId)
 
-  console.log(post)
-
   return isLoading ? (
     <Loading />
   ) : (
