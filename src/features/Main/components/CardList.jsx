@@ -1,4 +1,5 @@
 import { Box, Stack } from '@mui/material'
+import dayjs from 'dayjs'
 import React from 'react'
 import Card from '../../../components/Common/Card'
 
@@ -14,7 +15,7 @@ export function CardList({ postList }) {
                 author={post.author}
                 imageUrl={post.imageUrl}
                 short_description={post.short_description}
-                createdAt="12/11/2022"
+                createdAt={dayjs(post.createdAt).format('MMM,DD YYYY HH:mm:ss')}
                 avatar={post.avatar}
               />
             </Box>
