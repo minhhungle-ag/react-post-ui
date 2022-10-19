@@ -10,7 +10,7 @@ export function About(props) {
           About me
         </Typography>
 
-        <Stack direction="row" flexWrap="wrap" sx={{ mx: -2 }}>
+        <Stack direction="row" flexWrap="wrap" sx={{ mx: -4 }}>
           <Box
             sx={{
               width: {
@@ -19,7 +19,7 @@ export function About(props) {
               },
             }}
           >
-            <Box sx={{ p: 2 }}>
+            <Box sx={{ p: 4 }}>
               <Box sx={{ p: 2 }} boxShadow={3}>
                 <Box
                   sx={{ verticalAlign: 'middle' }}
@@ -39,7 +39,7 @@ export function About(props) {
               },
             }}
           >
-            <Stack sx={{ p: 2 }} spacing={2}>
+            <Stack sx={{ p: 4 }} spacing={2}>
               <Typography variant="h5">Hi, thanks for dropping by!</Typography>
               <Typography variant="body1" textAlign="justify">
                 I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click

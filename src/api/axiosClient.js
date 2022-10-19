@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { API_URL } from '../constants/common'
 
 const axiosClient = axios.create({
-  baseURL: 'https://heroku-post-ui.herokuapp.com/api',
+  baseURL: API_URL, // process.evn.API_URL
   headers: {
     'Content-Type': 'application/json',
   },

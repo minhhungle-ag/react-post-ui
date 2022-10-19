@@ -1,6 +1,8 @@
-import { Avatar, Box, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import React from 'react'
+import { DEFAULT_THUMBNAIL } from '../../constants/common'
+import { PostInfo } from './PostInfo'
 
 function Card({ title, short_description, imageUrl, author, createdAt, avatar }) {
   return (
@@ -15,21 +17,14 @@ function Card({ title, short_description, imageUrl, author, createdAt, avatar })
           component="img"
           width="100%"
           height="100%"
-          src={imageUrl}
+          src={imageUrl || DEFAULT_THUMBNAIL}
           sx={{ objectFit: 'cover' }}
-          onError={(e) => (e.target.src = 'https://picsum.photos/1024/607')}
+          onError={(event) => (event.target.src = DEFAULT_THUMBNAIL)}
         />
       </Box>
 
       <Stack spacing={1} sx={{ p: 2 }}>
-        <Stack direction="row" alignItems="center" spacing={1}>
-          <Avatar src={avatar} alt={author} />
-
-          <Box>
-            <Typography variant="body1">{author}</Typography>
-            <Typography variant="body2">{createdAt}</Typography>
-          </Box>
-        </Stack>
+        <PostInfo author={author} avatar={avatar} createdAt={createdAt} />
         <Typography variant="h6">{title}</Typography>
         <Typography variant="body2">{short_description}</Typography>
       </Stack>

@@ -17,8 +17,7 @@ import { NavLink } from 'react-router-dom'
 
 const pages = [
   { label: 'Blog', link: '/blog' },
-  { label: 'About', link: '/about' },
-  { label: 'Contact', link: '/contact' },
+  { label: 'About me', link: '/about' },
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
@@ -159,7 +158,10 @@ export function Header() {
             </Box>
           </Stack>
 
-          <Box
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={2}
             sx={{
               display: { xs: 'none', md: 'flex' },
               mr: 2,
@@ -188,7 +190,7 @@ export function Header() {
                 </Button>
               </NavLink>
             ))}
-          </Box>
+          </Stack>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
