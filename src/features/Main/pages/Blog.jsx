@@ -13,8 +13,8 @@ export function Blog(props) {
     page: 1,
     limit: 6,
   })
-  const { postList, pagination, isLoading } = usePosts(params)
 
+  const { postList, pagination, isLoading } = usePosts(params)
   const navigate = useNavigate()
 
   return isLoading ? (
@@ -37,7 +37,7 @@ export function Blog(props) {
 
           <CardList
             postList={postList || []}
-            onCardClick={(postId) => navigate(`/blog-detail/${postId}`)}
+            onCardClick={(postId) => navigate(`/blog/${postId}`)}
           />
 
           <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 6 }}>

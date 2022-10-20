@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Typography } from '@mui/material'
+import { Box, Container, Divider, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { Loading } from '../../../components/Common/Loading'
@@ -39,6 +39,8 @@ export function BlogDetail() {
 
           <Stack spacing={2}>
             <PostInfo avatar={post?.avatar} author={post?.author} createdAt={post?.createdAt} />
+
+            <Divider />
 
             <Typography variant="h5">{post?.short_description}</Typography>
 
