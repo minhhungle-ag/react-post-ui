@@ -1,10 +1,12 @@
-import { Box, Container, Stack, Typography } from '@mui/material'
+import { Box, Button, Container, Divider, Stack, Typography } from '@mui/material'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Loading } from '../../../components/Common/Loading'
 import { useUser } from '../../../hooks/user'
 
 function Profile(props) {
   const { user, isLoading } = useUser('2a416250-038f-4123-bf5d-057ba0aac479')
+  const navigate = useNavigate()
 
   return isLoading ? (
     <Loading />
@@ -62,6 +64,16 @@ function Profile(props) {
                   {user?.description}
                 </Typography>
               </Stack>
+
+              <Divider />
+
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => navigate('/user/add-edit-post')}
+              >
+                Add new post
+              </Button>
             </Stack>
           </Box>
         </Stack>

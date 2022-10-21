@@ -14,7 +14,7 @@ export const postApi = {
   },
 
   update(data) {
-    return axiosClient.patch(`/posts/${data?.id}`, data)
+    return axiosClient.put(`/posts/${data?.id}`, data)
   },
 
   remove(id) {

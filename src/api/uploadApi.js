@@ -1,6 +1,6 @@
 import axiosClient from './axiosClient'
 
-export const postApi = {
+export const uploadApi = {
   add(formData) {
     return axiosClient.post('/upload', formData, {
       headers: {

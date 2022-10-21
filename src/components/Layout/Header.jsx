@@ -96,7 +96,7 @@ export function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting, idx) => (
-                <MenuItem onClick={() => handleSettingClick(setting)}>
+                <MenuItem key={idx} onClick={() => handleSettingClick(setting)}>
                   <Typography textAlign="center">{setting.label}</Typography>
                 </MenuItem>
               ))}
