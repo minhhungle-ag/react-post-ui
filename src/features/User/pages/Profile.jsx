@@ -45,14 +45,17 @@ function Profile(props) {
     <Loading />
   ) : (
     <Box>
-      <Box>
+      <Box height={450}>
         <Box
           width="100%"
+          height="100%"
           component="img"
           alt="banner"
           src="https://picsum.photos/1368/450?blur=2"
+          sx={{ objectFit: 'cover' }}
         />
       </Box>
+
       <Box sx={{ my: { xs: 4, md: 8 } }}>
         <Container>
           <Typography
