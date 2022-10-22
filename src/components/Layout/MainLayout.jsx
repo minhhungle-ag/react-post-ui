@@ -1,12 +1,14 @@
-import { Box } from '@mui/material'
+import { Box, Stack } from '@mui/material'
 import React from 'react'
+import { Footer } from './Footer'
 import { Header } from './Header'
 
 export function MainLayout({ children }) {
   return (
-    <Box minHeight="100vh">
+    <Stack width="100%" minHeight="100vh">
       <Header />
-      <Box>{children}</Box>
-    </Box>
+      <Box flexGrow={1}>{children}</Box>
+      <Footer />
+    </Stack>
   )
 }

@@ -9,12 +9,11 @@ export function AddEditForm({ user, post, onFormSubmit }) {
     defaultValues: post || {
       author: user.fullname,
       avatar: user.avatar,
-      titlle: '',
+      title: '',
       imageUrl: '',
       short_description: '',
       description: '',
     },
-    mode: 'all',
   })
 
   function handleFormSubmit(formValues) {
@@ -40,8 +39,12 @@ export function AddEditForm({ user, post, onFormSubmit }) {
 
       <PhotoField control={control} name="imageUrl" width={350} height={200} />
 
-      <Button variant="contained" color="primary" type="submit" sx={{ mt: 2 }}>
+      <Button variant="contained" color="primary" type="submit" sx={{ mt: 2, mr: 1 }}>
         Save
+      </Button>
+
+      <Button variant="outlined" color="primary" type="submit" sx={{ mt: 2 }}>
+        Cancel
       </Button>
     </Box>
   )

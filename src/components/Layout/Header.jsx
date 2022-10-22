@@ -45,7 +45,7 @@ export function Header() {
       <Container>
         <Toolbar disableGutters sx={{ py: { xs: 2, md: 2.5 } }}>
           <Link to="/blog">
-            <Stack direction="row" alignItems="center" spacing={2}>
+            <Stack direction="row" alignItems="center" spacing={1.5}>
               <SouthAmericaIcon sx={{ fontSize: 58 }} />
 
               <Box>

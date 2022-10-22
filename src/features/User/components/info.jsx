@@ -4,7 +4,7 @@ import React from 'react'
 export function Info({ user, onBtnClick }) {
   return (
     <Stack direction="row" flexWrap="wrap" sx={{ mx: -3 }}>
-      <Box sx={{ width: { xs: '100%', md: 1 / 2 } }}>
+      <Box sx={{ width: { xs: '100%', sm: 1 / 3 } }}>
         <Box sx={{ p: 3 }}>
           <Box sx={{ p: 1 }} boxShadow={3}>
             <Box component="img" alt="user" src={user?.avatar} sx={{ width: '100%' }} />
@@ -12,7 +12,7 @@ export function Info({ user, onBtnClick }) {
         </Box>
       </Box>
 
-      <Box sx={{ width: { xs: '100%', md: 1 / 2 } }}>
+      <Box sx={{ width: { xs: '100%', sm: 2 / 3 } }}>
         <Stack spacing={3} sx={{ p: 3 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="h6" textTransform="uppercase">
