@@ -27,7 +27,7 @@ function MyPostList({ postList, onCardClick, onEdit, onRemove }) {
                     <IconButton
                       onClick={(e) => {
                         e.stopPropagation()
-                        onEdit?.(post.id)
+                        onEdit?.(post)
                       }}
                     >
                       <EditIcon />

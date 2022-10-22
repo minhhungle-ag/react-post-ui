@@ -5,7 +5,6 @@ import SouthAmericaIcon from '@mui/icons-material/SouthAmerica'
 import { Box, Container, Divider, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { categoryMenu, footerPageList } from '../../constants/common'
 
 const socialListIcon = [
   {
