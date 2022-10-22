@@ -46,6 +46,7 @@ export function Blog(props) {
               onChange={(event, page) => setParams({ ...params, page: page })}
               variant="outlined"
               shape="rounded"
+              page={params.page}
             />
           </Stack>
         </Container>

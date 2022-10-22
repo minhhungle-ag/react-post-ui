@@ -1,82 +1,67 @@
-import { Box, Button, Container, Divider, Stack, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Container, Pagination, Stack, Typography } from '@mui/material'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Loading } from '../../../components/Common/Loading'
+import { usePosts } from '../../../hooks/posts'
 import { useUser } from '../../../hooks/user'
+import { Info } from '../components/info'
+import MyPostList from '../components/MyPostList'
 
 function Profile(props) {
-  const { user, isLoading } = useUser('2a416250-038f-4123-bf5d-057ba0aac479')
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 2,
+  })
+
   const navigate = useNavigate()
+  const { user, isLoading } = useUser('2a416250-038f-4123-bf5d-057ba0aac479')
+  const { postList, pagination, removeMutation } = usePosts(params)
+
+  async function handleRemovePost(post) {
+    const message = `Do You Really Want To Remove "${post.title}"?`
+    if (window.confirm(message)) {
+      await removeMutation.mutateAsync(post.id)
+    }
+  }
 
   return isLoading ? (
     <Loading />
   ) : (
-    <Box>
+    <Box sx={{ my: { xs: 4, md: 8 } }}>
       <Container>
-        <Stack direction="row" flexWrap="wrap" sx={{ py: 8, mx: -3 }}>
-          <Box sx={{ width: { xs: '100%', md: 1 / 2 } }}>
-            <Box sx={{ p: 3 }}>
-              <Box sx={{ p: 1 }} boxShadow={3}>
-                <Box component="img" alt="user" src={user?.avatar} sx={{ width: '100%' }} />
-              </Box>
-            </Box>
-          </Box>
+        <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: { xs: 2, md: 6 } }}>
+          My profile
+        </Typography>
 
-          <Box sx={{ width: { xs: '100%', md: 1 / 2 } }}>
-            <Stack spacing={2} sx={{ p: 3 }}>
-              <Typography variant="h6" textTransform="uppercase">
-                {user?.role}
-              </Typography>
+        <Info user={user} onBtnClick={() => navigate('/user/add-new-post')} />
 
-              <Stack direction="row" alignItems="center">
-                <Typography variant="body" color="grey" marginRight={3} minWidth={100}>
-                  Name:
-                </Typography>
-                <Typography variant="body">{user?.fullname}</Typography>
-              </Stack>
+        <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ my: { xs: 2, md: 6 } }}>
+          My latest posts
+        </Typography>
 
-              <Stack direction="row" alignItems="center">
-                <Typography variant="body" color="grey" marginRight={3} minWidth={100}>
-                  Email:
-                </Typography>
-                <Typography variant="body">{user?.email}</Typography>
-              </Stack>
+        <MyPostList
+          postList={postList || []}
+          onCardClick={(postId) => navigate(`/blog/${postId}`)}
+          onEdit={(postId) => navigate(`/user/edit-post/${postId}`)}
+          onRemove={handleRemovePost}
+        />
 
-              <Stack direction="row" alignItems="center">
-                <Typography variant="body" color="grey" marginRight={3} minWidth={100}>
-                  Gender:
-                </Typography>
-                <Typography variant="body">{user?.gender}</Typography>
-              </Stack>
-
-              <Stack direction="row" alignItems="center">
-                <Typography variant="body" color="grey" marginRight={3} minWidth={100}>
-                  Age:
-                </Typography>
-                <Typography variant="body">{user?.age}</Typography>
-              </Stack>
-
-              <Stack direction="row" alignItems="flex-start">
-                <Typography variant="body" color="grey" marginRight={3} minWidth={100}>
-                  Description:
-                </Typography>
-                <Typography variant="body" textAlign="justify">
-                  {user?.description}
-                </Typography>
-              </Stack>
-
-              <Divider />
-
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => navigate('/user/add-edit-post')}
-              >
-                Add new post
-              </Button>
-            </Stack>
-          </Box>
-        </Stack>
+        {postList?.length > 0 && (
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ my: { xs: 2, md: 6 } }}
+          >
+            <Pagination
+              count={pagination?.total_page}
+              onChange={(event, page) => setParams({ ...params, page: page })}
+              variant="outlined"
+              shape="rounded"
+              page={params.page}
+            />
+          </Stack>
+        )}
       </Container>
     </Box>
   )

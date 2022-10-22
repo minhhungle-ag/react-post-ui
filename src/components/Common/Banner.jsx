@@ -21,7 +21,7 @@ export function Banner(props) {
         <Container>
           <Box>
             <Stack
-              alignItem="center"
+              alignItems="center"
               justifyContent="center"
               sx={{ display: 'inline-flex', p: 2, bgcolor: 'secondary.main', color: 'white' }}
               spacing={1}

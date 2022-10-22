@@ -3,7 +3,7 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { useUpload } from '../../hooks/upload'
-export function PhotoField({ name, control, label, imageUrl, width = '100%', height = 'auto' }) {
+export function PhotoField({ name, control, width = '100%', height = 'auto' }) {
   const {
     field: { value, onChange },
   } = useController({
@@ -59,7 +59,12 @@ export function PhotoField({ name, control, label, imageUrl, width = '100%', hei
       </Box>
 
       <Box
-        sx={{ border: '2px solid black', borderRadius: 1, overflow: 'hidden' }}
+        sx={{
+          border: '2px solid',
+          borderColor: 'primary.main',
+          borderRadius: 1,
+          overflow: 'hidden',
+        }}
         width={width}
         height={height}
       >

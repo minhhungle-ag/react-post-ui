@@ -5,8 +5,8 @@ export const userApi = {
     return axiosClient.get('/user', { params })
   },
 
-  get(id) {
-    return axiosClient.get(`/user/${id}`)
+  get(userId) {
+    return axiosClient.get(`/user/${userId}`)
   },
 
   add(data) {

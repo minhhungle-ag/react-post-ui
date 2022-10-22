@@ -5,11 +5,10 @@ import { InputField } from '../../../components/FormField/InputField'
 import { PhotoField } from '../../../components/FormField/PhotoField'
 
 export function AddEditForm({ user, post, onFormSubmit }) {
-  console.log(user)
   const { control, handleSubmit } = useForm({
     defaultValues: post || {
-      author: user?.author,
-      avatar: user?.avatar,
+      author: user.fullname,
+      avatar: user.avatar,
       titlle: '',
       imageUrl: '',
       short_description: '',

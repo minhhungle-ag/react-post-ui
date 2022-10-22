@@ -1,25 +1,35 @@
-import { Box, Container, Divider, Stack, Typography } from '@mui/material'
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Box, Container, Divider, Pagination, Stack, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Loading } from '../../../components/Common/Loading'
 import { PostInfo } from '../../../components/Common/PostInfo'
 import { DEFAULT_THUMBNAIL } from '../../../constants/common'
 import { usePost } from '../../../hooks/post'
+import { usePosts } from '../../../hooks/posts'
+import { RecentPostList } from '../components/RecentPostList'
 
 export function BlogDetail() {
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 2,
+  })
+
   const { postId } = useParams()
+  const navigate = useNavigate()
+
   const { post, isLoading } = usePost(postId)
+  const { postList, pagination } = usePosts({ ...params, author: post?.author })
 
   return isLoading ? (
     <Loading />
   ) : (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: { xs: 4, md: 8 } }}>
       <Container>
-        <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: 6 }}>
+        <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: { xs: 2, md: 6 } }}>
           Post detail
         </Typography>
 
-        <Stack spacing={4}>
+        <Stack spacing={3}>
           <Box position="relative" paddingTop="56.25%" height={0} boxShadow={3}>
             <Box position="absolute" top={0} left={0} right={0} bottom={0} padding={1}>
               <Box
@@ -33,7 +43,7 @@ export function BlogDetail() {
             </Box>
           </Box>
 
-          <Typography variant="h4" fontWeight={400} sx={{ mb: 6 }}>
+          <Typography variant="h4" fontWeight={400} sx={{ mb: { xs: 2, md: 6 } }}>
             {post?.title}
           </Typography>
 
@@ -48,6 +58,31 @@ export function BlogDetail() {
               {post?.description}
             </Typography>
           </Stack>
+
+          <Box>
+            <Typography variant="h5" fontWeight={500}>
+              Recent Posts
+            </Typography>
+
+            <RecentPostList
+              postList={postList || []}
+              onCardClick={(postId) => navigate(`/blog/${postId}`)}
+              columnLimit={4}
+              postId={postId}
+            />
+          </Box>
+
+          {postList?.length > 0 && (
+            <Stack direction="row" alignItems="center" justifyContent="center">
+              <Pagination
+                count={pagination?.total_page}
+                onChange={(event, page) => setParams({ ...params, page: page })}
+                variant="outlined"
+                shape="rounded"
+                page={params.page}
+              />
+            </Stack>
+          )}
         </Stack>
       </Container>
     </Box>

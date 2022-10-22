@@ -1,15 +1,17 @@
 import { Box, Container, Typography } from '@mui/material'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Loading } from '../../../components/Common/Loading'
 import { usePost } from '../../../hooks/post'
 import { usePosts } from '../../../hooks/posts'
 import { useUser } from '../../../hooks/user'
 import { AddEditForm } from '../components/AddEditForm'
 
 function AddEditPost(props) {
-  const { post, isLoading } = usePost('4b9d1a2f-4f41-4493-9e76-c0b1cc3445e2')
-  const { user, isLoading: userLoading } = useUser('4b9d1a2f-4f41-4493-9e76-c0b1cc3445e2')
+  const { postId } = useParams()
+
+  const { post } = usePost(postId)
+  const { user } = useUser('2a416250-038f-4123-bf5d-057ba0aac479')
   const { addMutation, updateMutation } = usePosts()
 
   async function handleFormSubmit(formValues) {
@@ -28,9 +30,7 @@ function AddEditPost(props) {
     }
   }
 
-  return isLoading || userLoading ? (
-    <Loading />
-  ) : (
+  return (
     <Box sx={{ my: 8 }}>
       <Container>
         <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: 6 }}>

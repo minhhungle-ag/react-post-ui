@@ -10,7 +10,8 @@ function User(props) {
       <Routes>
         <Route index element={<Navigate to="profile" />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="add-edit-post" element={<AddEditPost />} />
+        <Route path="add-new-post" element={<AddEditPost />} />
+        <Route path="edit-post/:postId" element={<AddEditPost />} />
       </Routes>
     </MainLayout>
   )

@@ -10,7 +10,12 @@ export function usePosts(params) {
   const addMutation = useMutation(postApi.add, {
     onSuccess: () => queryClient.invalidateQueries(queryKey),
   })
-  const updateMutation = useMutation(postApi.update, {
+
+  const updateMutation = useMutation((data) => postApi.update(data), {
+    onSuccess: () => queryClient.invalidateQueries(queryKey),
+  })
+
+  const removeMutation = useMutation((postId) => postApi.remove(postId), {
     onSuccess: () => queryClient.invalidateQueries(queryKey),
   })
 
@@ -21,5 +26,6 @@ export function usePosts(params) {
     pagination: data?.pagination,
     addMutation,
     updateMutation,
+    removeMutation,
   }
 }

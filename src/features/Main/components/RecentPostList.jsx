@@ -2,7 +2,7 @@ import { Box, Stack } from '@mui/material'
 import React from 'react'
 import Card from '../../../components/Common/Card'
 
-export function CardList({ postList, onCardClick }) {
+export function RecentPostList({ postList, onCardClick, postId }) {
   return (
     <Stack direction="row" flexWrap="wrap" sx={{ mx: -1.5 }}>
       {Array.isArray(postList) &&
@@ -10,7 +10,7 @@ export function CardList({ postList, onCardClick }) {
           <Box
             key={idx}
             sx={{
-              width: { xs: '100%', sm: 1 / 2, md: 1 / 3 },
+              width: { xs: '100%', sm: 1 / 2 },
             }}
             onClick={() => onCardClick?.(post.id)}
           >
@@ -22,6 +22,7 @@ export function CardList({ postList, onCardClick }) {
                 short_description={post.short_description}
                 createdAt={post.createdAt}
                 avatar={post.avatar}
+                selectedCard={postId === post.id}
               />
             </Box>
           </Box>
