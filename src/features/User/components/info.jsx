@@ -23,9 +23,12 @@ export function Info({ user, onBtnClick }) {
             <Typography variant="h4" textTransform="uppercase">
               {user?.fullname}
             </Typography>
-            <Button variant="contained" color="primary" onClick={() => onBtnClick?.()}>
-              Add new post
-            </Button>
+
+            {user.role === 'admin' && (
+              <Button variant="contained" color="primary" onClick={() => onBtnClick?.()}>
+                Go to Admin page
+              </Button>
+            )}
           </Stack>
 
           <Stack direction="row" alignItems="center">

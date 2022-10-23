@@ -1,19 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Container, Divider, Stack, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loading } from '../../../components/Common/Loading'
 import { PostInfo } from '../../../components/Common/PostInfo'
 import { DEFAULT_THUMBNAIL } from '../../../constants/common'
 import { usePost } from '../../../hooks/post'
 import { usePosts } from '../../../hooks/posts'
+import { randomNumberInRange } from '../../../utils/common'
 import { RecentPostList } from '../components/RecentPostList'
 
 export function BlogDetail() {
+  const [params, setParams] = useState({
+    page: 1,
+    limit: 6,
+  })
   const { postId } = useParams()
   const navigate = useNavigate()
 
   const { post, isLoading } = usePost(postId)
-  const { postList } = usePosts({ page: 1, limit: 3, author: post?.author, recent_post_id: postId })
+  const { postList, pagination } = usePosts({
+    ...params,
+  })
+
+  useEffect(() => {
+    if (post) {
+      const randomPage = randomNumberInRange(1, pagination?.total_page)
+      setParams((params) => ({
+        ...params,
+        page: randomPage,
+        author: post?.author,
+        recentId: post.id,
+      }))
+    }
+  }, [post])
+
+  const newPostList = postList?.filter((item) => item.id !== postId)
 
   return isLoading ? (
     <Loading />
@@ -72,17 +94,19 @@ export function BlogDetail() {
               </Typography>
             </Stack>
 
-            <Box>
-              <Typography variant="h5" fontWeight={500}>
-                Recent Posts
-              </Typography>
+            {Array.isArray(newPostList) && newPostList.length > 0 && (
+              <Box>
+                <Typography variant="h5" fontWeight={500}>
+                  Recent Posts
+                </Typography>
 
-              <RecentPostList
-                postList={postList || []}
-                onCardClick={(postId) => navigate(`/blog/${postId}`)}
-                columnLimit={4}
-              />
-            </Box>
+                <RecentPostList
+                  postList={newPostList}
+                  onCardClick={(postId) => navigate(`/blog/${postId}`)}
+                  columnLimit={4}
+                />
+              </Box>
+            )}
           </Stack>
         </Container>
       </Box>

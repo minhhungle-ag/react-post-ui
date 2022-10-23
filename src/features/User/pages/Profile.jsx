@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
+  Button,
   Container,
   Dialog,
   DialogContent,
@@ -25,7 +26,7 @@ export function Profile() {
   const [selectedPost, setSelectedPost] = useState(null)
   const [params, setParams] = useState({
     page: 1,
-    limit: 3,
+    limit: 6,
   })
 
   const navigate = useNavigate()
@@ -103,18 +104,28 @@ export function Profile() {
             My profile
           </Typography>
 
-          <Info user={user} onBtnClick={() => setShowAddEditModel(true)} />
+          <Info user={user} onBtnClick={() => navigate(`/admin`)} />
 
           {Array.isArray(postList) && postList.length > 0 && (
             <Box>
-              <Typography
-                variant="h3"
-                textAlign="center"
-                fontWeight={500}
-                sx={{ my: { xs: 2, md: 6 } }}
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                sx={{ my: { xs: 2, md: 3 } }}
               >
-                My latest posts
-              </Typography>
+                <Typography variant="h4" textAlign="center" fontWeight={500}>
+                  My latest posts
+                </Typography>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setShowAddEditModel(true)}
+                >
+                  Add new post
+                </Button>
+              </Stack>
 
               <MyPostList
                 postList={postList || []}

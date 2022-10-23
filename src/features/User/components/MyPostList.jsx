@@ -2,7 +2,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Box, IconButton, Stack } from '@mui/material'
 import React from 'react'
-import Card from '../../../components/Common/Card'
+import { Card } from '../../../components/Common/Card'
 
 function MyPostList({ postList, onCardClick, onEdit, onRemove }) {
   return (
@@ -11,17 +11,10 @@ function MyPostList({ postList, onCardClick, onEdit, onRemove }) {
         postList.map((post, idx) => (
           <Box
             key={idx}
-            sx={{ width: { xs: '100%', sm: 1 / 3 } }}
+            sx={{ width: { xs: '100%', sm: 1 / 2, md: 1 / 3 } }}
             onClick={() => onCardClick?.(post.id)}
           >
-            <Box
-              sx={{
-                p: 1.5,
-                '.title': {
-                  minHeight: { sm: 48, md: 0 },
-                },
-              }}
-            >
+            <Box sx={{ p: 1.5 }}>
               <Card
                 title={post.title}
                 author={post.author}

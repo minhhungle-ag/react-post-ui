@@ -32,7 +32,7 @@ export function Header() {
   const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
 
-  const { user, isLoading } = useUser(userId)
+  const { user } = useUser(userId)
 
   function handleOpenUserMenu(event) {
     setAnchorElUser(event.currentTarget)

@@ -1,19 +1,18 @@
-import { Box, Divider, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import React from 'react'
 import { DEFAULT_THUMBNAIL } from '../../constants/common'
 import { truncateText } from '../../utils/common'
-import { PostInfo } from './PostInfo'
 
-export function Card({ title, short_description, imageUrl, author, createdAt, avatar, action }) {
+export function RecentCard({ title, imageUrl, short_description }) {
   return (
     <Box
       boxShadow={3}
       sx={{
         borderRadius: '4px',
-
         cursor: 'pointer',
         overflow: 'hidden',
+
         '&:hover': {
           boxShadow: (theme) => theme.shadows[10],
         },
@@ -36,10 +35,6 @@ export function Card({ title, short_description, imageUrl, author, createdAt, av
       </Box>
 
       <Stack spacing={2} sx={{ p: 2 }}>
-        <PostInfo author={author} avatar={avatar} createdAt={createdAt} />
-
-        <Divider />
-
         <Typography variant="body1" fontWeight={500}>
           {truncateText(title, 30)}
         </Typography>
@@ -47,8 +42,6 @@ export function Card({ title, short_description, imageUrl, author, createdAt, av
         <Typography minHeight={60} variant="body2" sx={{ flexGrow: 1 }}>
           {truncateText(short_description, 80)}
         </Typography>
-
-        {action}
       </Stack>
     </Box>
   )

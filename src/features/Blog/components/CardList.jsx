@@ -1,6 +1,6 @@
 import { Box, Stack } from '@mui/material'
 import React from 'react'
-import Card from '../../../components/Common/Card'
+import { Card } from '../../../components/Common/Card'
 
 export function CardList({ postList, onCardClick }) {
   return (

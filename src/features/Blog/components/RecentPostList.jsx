@@ -1,6 +1,7 @@
 import { Box, Stack } from '@mui/material'
 import React from 'react'
-import Card from '../../../components/Common/Card'
+import { Card } from '../../../components/Common/Card'
+import { RecentCard } from '../../../components/Common/RecentCard'
 
 export function RecentPostList({ postList, onCardClick }) {
   return (
@@ -10,19 +11,12 @@ export function RecentPostList({ postList, onCardClick }) {
           <Box
             key={idx}
             sx={{
-              width: { xs: '100%', sm: 1 / 3 },
+              width: { xs: '100%', sm: 1 / 2, md: 1 / 3 },
             }}
             onClick={() => onCardClick?.(post.id)}
           >
-            <Box
-              sx={{
-                p: 1.5,
-                '.title': {
-                  minHeight: { sm: 48, md: 0 },
-                },
-              }}
-            >
-              <Card
+            <Box sx={{ p: 1.5 }}>
+              <RecentCard
                 title={post.title}
                 author={post.author}
                 imageUrl={post.imageUrl}
