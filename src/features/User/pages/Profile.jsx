@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Container,
@@ -19,16 +20,23 @@ import { AddEditForm } from '../components/AddEditForm'
 import { Info } from '../components/info'
 import MyPostList from '../components/MyPostList'
 
-function Profile(props) {
+export function Profile() {
   const [showAddEditModel, setShowAddEditModel] = useState(false)
   const [selectedPost, setSelectedPost] = useState(null)
   const [params, setParams] = useState({
     page: 1,
-    limit: 2,
+    limit: 6,
   })
 
   const navigate = useNavigate()
-  const { user, isLoading } = useUser('2a416250-038f-4123-bf5d-057ba0aac479')
+  const token = localStorage.getItem('token')
+  const userId = localStorage.getItem('userId')
+
+  if (!token) {
+    navigate('/auth/login')
+  }
+
+  const { user, isLoading } = useUser(userId)
   const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts({
     ...params,
     author: user?.fullname,
@@ -80,6 +88,7 @@ function Profile(props) {
           alt="banner"
           src="https://picsum.photos/1368/300?blur=2"
           sx={{ objectFit: 'cover' }}
+          onError={(e) => (e.target.src = 'https://picsum.photos/id/2/1368/300?blur=2')}
         />
       </Box>
 
@@ -135,7 +144,9 @@ function Profile(props) {
           )}
 
           <Dialog open={showAddEditModel} onClose={handleClose} fullWidth maxWidth="md">
-            <DialogTitle>{selectedPost ? 'EDIT POSt' : 'ADD NEW POST'}</DialogTitle>
+            <DialogTitle sx={{ fontWeight: 'bold' }}>
+              {selectedPost ? 'Edit post' : 'Add new post'}
+            </DialogTitle>
 
             <Divider />
 
@@ -153,5 +164,3 @@ function Profile(props) {
     </Box>
   )
 }
-
-export default Profile

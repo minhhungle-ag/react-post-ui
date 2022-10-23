@@ -1,8 +1,16 @@
 import { Box, Button, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 import { InputField } from '../../../components/FormField/InputField'
 import { PhotoField } from '../../../components/FormField/PhotoField'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+const schema = yup.object({
+  title: yup.string().required(),
+  imageUrl: yup.string().required(),
+  short_description: yup.string().required(),
+})
 
 export function AddEditForm({ user, post, onFormSubmit, onCancelClick }) {
   const [value, setValue] = useState('random')
@@ -20,6 +28,8 @@ export function AddEditForm({ user, post, onFormSubmit, onCancelClick }) {
       short_description: '',
       description: '',
     },
+    resolver: yupResolver(schema),
+    mode: 'all',
   })
 
   function handleFormSubmit(formValues) {
@@ -55,7 +65,7 @@ export function AddEditForm({ user, post, onFormSubmit, onCancelClick }) {
         </RadioGroup>
       </FormControl>
 
-      {value === 'random' && <InputField control={control} name="imageUrl" label="imageUrl" />}
+      {value === 'random' && <InputField control={control} name="imageUrl" label="Image url" />}
       {value === 'upload' && (
         <>
           <Box sx={{ mb: 2 }} />

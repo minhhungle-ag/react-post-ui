@@ -11,7 +11,7 @@ function MyPostList({ postList, onCardClick, onEdit, onRemove }) {
         postList.map((post, idx) => (
           <Box
             key={idx}
-            sx={{ width: { xs: '100%', sm: 1 / 2 } }}
+            sx={{ width: { xs: '100%', sm: 1 / 2, md: 1 / 3 } }}
             onClick={() => onCardClick?.(post.id)}
           >
             <Box sx={{ p: 1.5 }}>

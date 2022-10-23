@@ -12,6 +12,7 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(function (config) {
   // Auto attach token to request if available in local storage
   const token = localStorage.getItem('token')
+
   if (config.url !== '/login' && token) {
     config.headers = {
       ...config.headers,

@@ -80,13 +80,14 @@ export function Footer(props) {
                 Socials
               </Typography>
 
-              <Stack direction="row" alignItem="center" spacing={1}>
+              <Stack direction="row" alignItems="center" spacing={1}>
                 {socialListIcon.map((item, idx) => (
                   <Stack
                     direction="row"
                     alignItems="center"
                     justifyContent="center"
                     sx={{ cursor: 'pointer' }}
+                    key={idx}
                   >
                     {item.icon}
                   </Stack>

@@ -12,17 +12,27 @@ import Tooltip from '@mui/material/Tooltip'
 import Typography from '@mui/material/Typography'
 import * as React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import { useUser } from '../../hooks/user'
 
 const settings = [
   { label: 'Profile', link: 'profile' },
-  { label: 'Login', link: '' },
-  { label: 'Logout', link: '' },
+  { label: 'Logout', value: 'logout' },
+]
+
+const authSettings = [
+  { label: 'Login', link: 'login' },
+  { label: 'SignUp', link: 'signUp' },
 ]
 
 export function Header() {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
   const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  const userId = localStorage.getItem('userId')
+
+  const { user, isLoading } = useUser(userId)
 
   function handleOpenUserMenu(event) {
     setAnchorElUser(event.currentTarget)
@@ -35,6 +45,18 @@ export function Header() {
   function handleSettingClick(setting) {
     if (setting.link) {
       navigate(`/user/${setting.link}`)
+    }
+
+    if (setting.value === 'logout') {
+      localStorage.setItem('token', '')
+      navigate(`/`)
+    }
+
+    handleCloseUserMenu()
+  }
+  function handleAuthSettingClick(setting) {
+    if (setting.link) {
+      navigate(`/auth/${setting.link}`)
     }
 
     handleCloseUserMenu()
@@ -71,11 +93,8 @@ export function Header() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://static.wixstatic.com/media/2e2a49_d456d06d41b346d3b36f426cb4142859~mv2.jpg/v1/fill/w_581,h_596,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/2e2a49_d456d06d41b346d3b36f426cb4142859~mv2.jpg"
-                />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: token ? 0 : 1, color: 'white' }}>
+                {token ? <Avatar alt="Remy Sharp" src={user?.avatar} /> : <AccountCircleIcon />}
               </IconButton>
             </Tooltip>
 
@@ -95,11 +114,19 @@ export function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting, idx) => (
-                <MenuItem key={idx} onClick={() => handleSettingClick(setting)}>
-                  <Typography textAlign="center">{setting.label}</Typography>
-                </MenuItem>
-              ))}
+              {token &&
+                settings.map((setting, idx) => (
+                  <MenuItem key={idx} onClick={() => handleSettingClick(setting)}>
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </MenuItem>
+                ))}
+
+              {!token &&
+                authSettings.map((setting, idx) => (
+                  <MenuItem key={idx} onClick={() => handleAuthSettingClick(setting)}>
+                    <Typography textAlign="center">{setting.label}</Typography>
+                  </MenuItem>
+                ))}
             </Menu>
           </Box>
         </Toolbar>

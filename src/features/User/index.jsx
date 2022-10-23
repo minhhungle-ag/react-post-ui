@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Profile from './pages/Profile'
+import { Profile } from './pages/Profile'
 
 function User(props) {
   return (

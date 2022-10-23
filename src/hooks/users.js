@@ -7,10 +7,10 @@ export function useUsers(params) {
 
   const { data, isLoading, error } = useQuery(queryKey, () => userApi.getAll(params))
 
-  const addMutation = useMutation(userApi.add, {
+  const addMutation = useMutation((data) => userApi.add(data), {
     onSuccess: () => queryClient.invalidateQueries(queryKey),
   })
-  const updateMutation = useMutation(userApi.update, {
+  const updateMutation = useMutation((data) => userApi.update(data), {
     onSuccess: () => queryClient.invalidateQueries(queryKey),
   })
 

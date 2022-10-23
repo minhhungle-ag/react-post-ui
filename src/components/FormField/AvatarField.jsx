@@ -1,9 +1,8 @@
-import UploadIcon from '@mui/icons-material/Upload'
-import { Box, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { useUpload } from '../../hooks/upload'
-export function PhotoField({ name, control, label, imageUrl, width = '100%', height = 'auto' }) {
+export function AvatarField({ name, control, width = 80, height = 'auto' }) {
   const {
     field: { value, onChange },
     fieldState: { invalid, error },
@@ -25,6 +24,7 @@ export function PhotoField({ name, control, label, imageUrl, width = '100%', hei
 
     const formData = new FormData()
     formData.append('imageUrl', file)
+
     try {
       await addMutation.mutateAsync(formData).then((response) => {
         if (response) {
@@ -40,16 +40,17 @@ export function PhotoField({ name, control, label, imageUrl, width = '100%', hei
   }
 
   const previewUrl = value || preview
-  const key = `${name}-photo-field`
+  const key = `${name}-avatar-field`
 
   return (
-    <Stack width={width} height={height}>
+    <Stack justifyContent="center" alignItems="center" spacing={1.5}>
       <Box
         component="label"
-        width="100%"
+        width={width}
+        height={width}
         flexGrow={1}
         htmlFor={key}
-        sx={{ border: '2px solid black', borderRadius: 1, overflow: 'hidden', cursor: 'pointer' }}
+        sx={{ cursor: 'pointer' }}
       >
         <Box
           hidden
@@ -60,40 +61,18 @@ export function PhotoField({ name, control, label, imageUrl, width = '100%', hei
           onChange={handleFileChange}
         />
 
-        <Box
+        <Avatar
+          alt="avatar"
+          src={previewUrl}
           sx={{
             width: '100%',
             height: '100%',
           }}
-        >
-          {previewUrl ? (
-            <Box
-              component="img"
-              alt="image"
-              src={previewUrl}
-              sx={{ width: '100%', height: '100%', verticalAlign: 'middle', objectFit: 'cover' }}
-            />
-          ) : (
-            <Stack justifyContent="center" alignItems="center" width={'100%'} height={'100%'}>
-              <Typography color="grey" fontWeight={200}>
-                <UploadIcon sx={{ fontSize: 64 }} />
-              </Typography>
-            </Stack>
-          )}
-        </Box>
+        />
       </Box>
-
-      {invalid && (
-        <Typography
-          variant="body2"
-          fontSize={12}
-          fontWeight={400}
-          color="error"
-          sx={{ mt: 0.5, ml: 2 }}
-        >
-          {error?.message}
-        </Typography>
-      )}
+      <Typography variant="body2" fontSize={12} fontWeight={400} color="error" sx={{ ml: 2 }}>
+        {invalid && error?.message}
+      </Typography>
     </Stack>
   )
 }

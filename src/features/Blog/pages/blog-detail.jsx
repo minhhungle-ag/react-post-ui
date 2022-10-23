@@ -27,6 +27,7 @@ export function BlogDetail() {
           alt="banner"
           src="https://picsum.photos/1368/300?blur=2"
           sx={{ objectFit: 'cover' }}
+          onError={(e) => (e.target.src = 'https://picsum.photos/id/2/1368/300?blur=2')}
         />
       </Box>
 

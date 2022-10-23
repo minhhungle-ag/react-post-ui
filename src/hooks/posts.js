@@ -7,7 +7,7 @@ export function usePosts(params) {
 
   const { data, isLoading, error } = useQuery(queryKey, () => postApi.getAll(params))
 
-  const addMutation = useMutation(postApi.add, {
+  const addMutation = useMutation((data) => postApi.add(data), {
     onSuccess: () => queryClient.invalidateQueries(queryKey),
   })
 

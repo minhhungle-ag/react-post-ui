@@ -49,9 +49,9 @@ function Card({
       <Stack spacing={1} sx={{ p: 2 }}>
         <PostInfo author={author} avatar={avatar} createdAt={createdAt} />
         <Typography variant="body1" fontWeight={900}>
-          {truncateText(title, 40)}
+          {truncateText(title, 30)}
         </Typography>
-        <Typography variant="body2" sx={{ flexGrow: 1 }}>
+        <Typography minHeight={60} variant="body2" sx={{ flexGrow: 1 }}>
           {truncateText(short_description, 80)}
         </Typography>
       </Stack>
