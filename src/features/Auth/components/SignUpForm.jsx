@@ -1,13 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { Box, Button, IconButton, InputAdornment } from '@mui/material'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { InputField } from '../../../components/FormField/InputField'
 import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { SelectField } from '../../../components/FormField/SelectField'
-import { PhotoField } from '../../../components/FormField/PhotoField'
 import { AvatarField } from '../../../components/FormField/AvatarField'
+import { InputField } from '../../../components/FormField/InputField'
+import { SelectField } from '../../../components/FormField/SelectField'
 
 const emailRegex =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
