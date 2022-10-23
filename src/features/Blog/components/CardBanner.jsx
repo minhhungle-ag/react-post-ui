@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Box, Divider, Stack, Typography } from '@mui/material'
 import { PostInfo } from '../../../components/Common/PostInfo'
+import { DEFAULT_THUMBNAIL } from '../../../constants/common'
 
 function CardBanner({ post }) {
   return (
@@ -19,11 +20,12 @@ function CardBanner({ post }) {
           <Box sx={{ p: 2 }}>
             <Box>
               <Box
-                sx={{ verticalAlign: 'middle', objectFit: 'cover', maxHeight: 300 }}
+                sx={{ verticalAlign: 'middle', objectFit: 'cover', height: 300 }}
                 component="img"
                 width="100%"
                 height="100%"
                 src={post?.imageUrl}
+                onError={(e) => (e.target.src = DEFAULT_THUMBNAIL)}
               />
             </Box>
           </Box>

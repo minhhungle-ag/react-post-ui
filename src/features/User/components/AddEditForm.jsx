@@ -80,7 +80,6 @@ export function AddEditForm({ user, post, onFormSubmit, onCancelClick }) {
       <Button
         variant="outlined"
         color="primary"
-        type="submit"
         sx={{ mt: 2 }}
         onClick={(e) => {
           e.preventDefault()
