@@ -5,7 +5,7 @@ import { useUsers } from '../../hooks/users'
 import { UsersFilter } from './components/UserFilter'
 import { UserList } from './components/UserList'
 
-function Users(props) {
+export function Users(props) {
   const [params, setParams] = useState({
     page: 1,
     limit: 6,
@@ -35,5 +35,3 @@ function Users(props) {
     </Stack>
   )
 }
-
-export default Users

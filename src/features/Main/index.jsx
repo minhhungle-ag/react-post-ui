@@ -4,7 +4,7 @@ import { MainLayout } from '../../components/Layout/MainLayout'
 import { Blogs } from '../blog'
 import User from '../user'
 
-export function Main(props) {
+export default function Main(props) {
   return (
     <MainLayout>
       <Routes>

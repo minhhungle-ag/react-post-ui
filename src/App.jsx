@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Admin from './features/admin'
-import { Auth } from './features/auth'
-import { Main } from './features/main'
+import Auth from './features/auth'
+import Main from './features/main'
 
 function App() {
   return (

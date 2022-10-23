@@ -3,7 +3,7 @@ import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import { AdminLayout } from '../../components/Layout/AdminLayout'
 import Users from '../users/Users'
 
-function Admin(props) {
+export default function Admin(props) {
   return (
     <AdminLayout>
       <Routes>
@@ -14,5 +14,3 @@ function Admin(props) {
     </AdminLayout>
   )
 }
-
-export default Admin

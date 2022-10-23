@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { Login } from './pages/Login'
 import { SignUp } from './pages/SignUp'
 
-export function Auth(props) {
+export default function Auth(props) {
   return (
     <Routes>
       <Route index element={<Navigate to="login" />} />
