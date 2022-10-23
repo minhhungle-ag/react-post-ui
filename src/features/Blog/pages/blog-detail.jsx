@@ -13,7 +13,7 @@ export function BlogDetail() {
   const navigate = useNavigate()
 
   const { post, isLoading } = usePost(postId)
-  const { postList } = usePosts({ page: 1, limit: 6, author: post?.author, recent_post_id: postId })
+  const { postList } = usePosts({ page: 1, limit: 3, author: post?.author, recent_post_id: postId })
 
   return isLoading ? (
     <Loading />

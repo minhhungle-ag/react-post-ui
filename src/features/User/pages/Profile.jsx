@@ -25,7 +25,7 @@ export function Profile() {
   const [selectedPost, setSelectedPost] = useState(null)
   const [params, setParams] = useState({
     page: 1,
-    limit: 6,
+    limit: 3,
   })
 
   const navigate = useNavigate()

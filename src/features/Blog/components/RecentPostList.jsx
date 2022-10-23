@@ -10,11 +10,18 @@ export function RecentPostList({ postList, onCardClick }) {
           <Box
             key={idx}
             sx={{
-              width: { xs: '100%', sm: 1 / 2, md: 1 / 3 },
+              width: { xs: '100%', sm: 1 / 3 },
             }}
             onClick={() => onCardClick?.(post.id)}
           >
-            <Box sx={{ p: 1.5 }}>
+            <Box
+              sx={{
+                p: 1.5,
+                '.title': {
+                  minHeight: { sm: 48, md: 0 },
+                },
+              }}
+            >
               <Card
                 title={post.title}
                 author={post.author}

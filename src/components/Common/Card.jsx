@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Divider, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import React from 'react'
 import { DEFAULT_THUMBNAIL } from '../../constants/common'
@@ -46,17 +46,21 @@ function Card({
         />
       </Box>
 
-      <Stack spacing={1} sx={{ p: 2 }}>
+      <Stack spacing={2} sx={{ p: 2 }}>
         <PostInfo author={author} avatar={avatar} createdAt={createdAt} />
-        <Typography variant="body1" fontWeight={900}>
+
+        <Divider />
+
+        <Typography variant="body1" className="title" fontWeight={500}>
           {truncateText(title, 30)}
         </Typography>
+
         <Typography minHeight={60} variant="body2" sx={{ flexGrow: 1 }}>
           {truncateText(short_description, 80)}
         </Typography>
-      </Stack>
 
-      {action && <Box sx={{ p: 2 }}>{action}</Box>}
+        {action}
+      </Stack>
     </Box>
   )
 }
