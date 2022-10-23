@@ -2,7 +2,7 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Profile } from './pages/Profile'
 
-function User(props) {
+export default function User(props) {
   return (
     <Routes>
       <Route index element={<Navigate to="profile" />} />
@@ -10,5 +10,3 @@ function User(props) {
     </Routes>
   )
 }
-
-export default User
