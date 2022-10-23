@@ -94,7 +94,11 @@ export function Header() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: token ? 0 : 1, color: 'white' }}>
-                {token ? <Avatar alt="Remy Sharp" src={user?.avatar} /> : <AccountCircleIcon />}
+                {token ? (
+                  <Avatar alt="Remy Sharp" src={user?.avatar} />
+                ) : (
+                  <AccountCircleIcon fontSize="large" />
+                )}
               </IconButton>
             </Tooltip>
 
