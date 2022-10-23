@@ -1,7 +1,18 @@
 import React from 'react'
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { AdminLayout } from '../../components/Layout/AdminLayout'
+import Users from '../users/Users'
 
 function Admin(props) {
-  return <div>Admin</div>
+  return (
+    <AdminLayout>
+      <Routes>
+        <Route index element={<Navigate to="users" />} />
+        <Route path="users" element={<Users />} />
+      </Routes>
+      <Outlet />
+    </AdminLayout>
+  )
 }
 
 export default Admin

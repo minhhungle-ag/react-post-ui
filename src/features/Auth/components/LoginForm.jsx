@@ -66,7 +66,7 @@ export function LoginForm({ onFormSubmit }) {
       />
 
       <Button type="submit" variant="contained" fullWidth color="primary" sx={{ mt: 2 }}>
-        Submit
+        Login
       </Button>
     </Box>
   )

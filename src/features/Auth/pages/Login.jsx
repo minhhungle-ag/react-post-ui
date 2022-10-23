@@ -44,7 +44,7 @@ export function Login(props) {
           </Typography>
 
           <Stack direction="row" alignItems="center" justifyContent="center">
-            <Box sx={{ width: { xs: '100%', md: 1 / 3 } }}>
+            <Box boxShadow={3} sx={{ width: { xs: '100%', md: 1 / 2 }, p: 3 }}>
               <LoginForm onFormSubmit={handleFormSubmit} />
             </Box>
           </Stack>

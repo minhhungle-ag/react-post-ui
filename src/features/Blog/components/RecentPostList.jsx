@@ -1,6 +1,5 @@
 import { Box, Stack } from '@mui/material'
 import React from 'react'
-import { Card } from '../../../components/Common/Card'
 import { RecentCard } from '../../../components/Common/RecentCard'
 
 export function RecentPostList({ postList, onCardClick }) {

@@ -33,10 +33,6 @@ export function Profile() {
   const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
 
-  if (!token) {
-    navigate('/auth/login')
-  }
-
   const { user, isLoading } = useUser(userId)
   const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts({
     ...params,
@@ -75,6 +71,11 @@ export function Profile() {
     await addMutation.mutateAsync(formValues)
     toast.success('Add new post success')
     handleClose()
+  }
+
+  if (!token) {
+    navigate('/auth/login')
+    return null
   }
 
   return isLoading ? (

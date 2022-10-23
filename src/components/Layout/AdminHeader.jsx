@@ -24,7 +24,7 @@ const authSettings = [
   { label: 'SignUp', link: 'signUp' },
 ]
 
-export function Header() {
+export function AdminHeader() {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
   const navigate = useNavigate()
@@ -48,7 +48,7 @@ export function Header() {
 
     if (setting.value === 'logout') {
       localStorage.setItem('token', '')
-      navigate(`/`)
+      navigate(`/admin`)
     }
 
     handleCloseUserMenu()
@@ -64,7 +64,7 @@ export function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Link to="/blog">
+        <Link to="/admin">
           <Stack direction="row" alignItems="center" spacing={1.5}>
             <SouthAmericaIcon sx={{ fontSize: 58 }} />
 

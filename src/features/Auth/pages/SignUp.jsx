@@ -41,7 +41,7 @@ export function SignUp(props) {
           </Typography>
 
           <Stack direction="row" alignItems="center" justifyContent="center">
-            <Box sx={{ width: { xs: '100%', md: 1 / 3 } }}>
+            <Box boxShadow={2} sx={{ width: { xs: '100%', md: 1 / 2 }, p: 3 }}>
               <SignUpForm onFormSubmit={handleFormSubmit} />
             </Box>
           </Stack>
