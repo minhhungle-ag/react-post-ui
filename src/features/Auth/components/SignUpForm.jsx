@@ -12,6 +12,7 @@ const emailRegex =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
 const schema = yup.object({
+  fullname: yup.string().required(),
   email: yup.string().required().matches(emailRegex),
   password: yup.string().required(),
   avatar: yup.string().required(),

@@ -82,7 +82,10 @@ export function AddEditForm({ user, post, onFormSubmit, onCancelClick }) {
         color="primary"
         type="submit"
         sx={{ mt: 2 }}
-        onClick={() => onCancelClick?.()}
+        onClick={(e) => {
+          e.preventDefault()
+          onCancelClick?.()
+        }}
       >
         Cancel
       </Button>
