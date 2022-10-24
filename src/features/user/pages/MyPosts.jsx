@@ -18,7 +18,6 @@ import { Loading } from '../../../components/Common/Loading'
 import { usePosts } from '../../../hooks/posts'
 import { useUser } from '../../../hooks/user'
 import { AddEditForm } from '../components/AddEditForm'
-import { Info } from '../components/info'
 import MyPostList from '../components/MyPostList'
 
 export function MyPosts() {
