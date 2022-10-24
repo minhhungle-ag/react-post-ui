@@ -10,7 +10,7 @@ import { usePosts } from '../../../hooks/posts'
 import { randomNumberInRange } from '../../../utils/common'
 import { RecentPostList } from '../components/RecentPostList'
 
-export function BlogDetail() {
+export function HomeDetail() {
   const [params, setParams] = useState({
     page: 1,
     limit: 6,
@@ -102,7 +102,7 @@ export function BlogDetail() {
 
                 <RecentPostList
                   postList={newPostList}
-                  onCardClick={(postId) => navigate(`/blog/${postId}`)}
+                  onCardClick={(postId) => navigate(`/home/${postId}`)}
                   columnLimit={4}
                 />
               </Box>

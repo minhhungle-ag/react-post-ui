@@ -43,7 +43,7 @@ export function Footer(props) {
           justifyContent="space-between"
           sx={{ py: { xs: 2, md: 6 } }}
         >
-          <Link to="/blog" style={{ margin: '16px 0' }}>
+          <Link to="/home" style={{ margin: '16px 0' }}>
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <SouthAmericaIcon sx={{ fontSize: 58 }} />
 

@@ -66,7 +66,7 @@ export function Header() {
     <AppBar position="sticky">
       <Container>
         <Toolbar disableGutters sx={{ py: { xs: 1.5, md: 2 } }}>
-          <Link to="/blog">
+          <Link to="/home">
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <SouthAmericaIcon sx={{ fontSize: 58 }} />
 

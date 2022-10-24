@@ -23,12 +23,6 @@ export function Info({ user, onBtnClick }) {
             <Typography variant="h4" textTransform="uppercase">
               {user?.fullname}
             </Typography>
-
-            {user.role === 'admin' && (
-              <Button variant="contained" color="primary" onClick={() => onBtnClick?.()}>
-                Go to Admin page
-              </Button>
-            )}
           </Stack>
 
           <Stack direction="row" alignItems="center">
@@ -60,6 +54,10 @@ export function Info({ user, onBtnClick }) {
               {user?.description}
             </Typography>
           </Stack>
+
+          <Button fullWidth variant="contained" color="primary" onClick={() => onBtnClick?.()}>
+            Go to my post
+          </Button>
         </Stack>
       </Box>
     </Stack>

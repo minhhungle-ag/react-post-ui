@@ -8,7 +8,7 @@ import { usePosts } from '../../../hooks/posts'
 import CardBanner from '../components/CardBanner'
 import { CardList } from '../components/CardList'
 
-const currenPost = {
+const currentPost = {
   title: 'Top Hikes In Australia',
   author: 'Anna Martin',
   avatar:
@@ -23,8 +23,8 @@ const currenPost = {
   updatedAt: '2022-10-23T09:05:21.619Z',
 }
 
-export function Blog(props) {
-  const [latedPost, setLatestPost] = useState(currenPost)
+export function HomePage(props) {
+  const [latedPost, setLatestPost] = useState(currentPost)
   const [params, setParams] = useState({
     page: 1,
     limit: 6,

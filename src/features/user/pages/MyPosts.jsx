@@ -21,7 +21,7 @@ import { AddEditForm } from '../components/AddEditForm'
 import { Info } from '../components/info'
 import MyPostList from '../components/MyPostList'
 
-export function Profile() {
+export function MyPosts() {
   const [showAddEditModel, setShowAddEditModel] = useState(false)
   const [selectedPost, setSelectedPost] = useState(null)
   const [params, setParams] = useState({
@@ -96,64 +96,47 @@ export function Profile() {
 
       <Box sx={{ my: { xs: 4, md: 8 } }}>
         <Container>
-          <Typography
-            variant="h3"
-            textAlign="center"
-            fontWeight={500}
-            sx={{ mb: { xs: 2, md: 6 } }}
-          >
-            My profile
-          </Typography>
+          <Box>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              sx={{ my: { xs: 2, md: 3 } }}
+            >
+              <Typography variant="h4" textAlign="center" fontWeight={500}>
+                My latest posts
+              </Typography>
 
-          <Info user={user} onBtnClick={() => navigate(`/admin`)} />
+              <Button variant="contained" color="primary" onClick={() => setShowAddEditModel(true)}>
+                Add new post
+              </Button>
+            </Stack>
 
-          {Array.isArray(postList) && postList.length > 0 && (
-            <Box>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{ my: { xs: 2, md: 3 } }}
-              >
-                <Typography variant="h4" textAlign="center" fontWeight={500}>
-                  My latest posts
-                </Typography>
+            <MyPostList
+              postList={postList || []}
+              onCardClick={(postId) => navigate(`/home/${postId}`)}
+              onEdit={(post) => {
+                setSelectedPost(post)
+                setShowAddEditModel(true)
+              }}
+              onRemove={handleRemovePost}
+            />
 
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setShowAddEditModel(true)}
-                >
-                  Add new post
-                </Button>
-              </Stack>
-
-              <MyPostList
-                postList={postList || []}
-                onCardClick={(postId) => navigate(`/blog/${postId}`)}
-                onEdit={(post) => {
-                  setSelectedPost(post)
-                  setShowAddEditModel(true)
-                }}
-                onRemove={handleRemovePost}
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ my: { xs: 2, md: 6 } }}
+            >
+              <Pagination
+                count={pagination?.total_page}
+                onChange={(event, page) => setParams({ ...params, page: page })}
+                variant="outlined"
+                shape="rounded"
+                page={params.page}
               />
-
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="center"
-                sx={{ my: { xs: 2, md: 6 } }}
-              >
-                <Pagination
-                  count={pagination?.total_page}
-                  onChange={(event, page) => setParams({ ...params, page: page })}
-                  variant="outlined"
-                  shape="rounded"
-                  page={params.page}
-                />
-              </Stack>
-            </Box>
-          )}
+            </Stack>
+          </Box>
 
           <Dialog open={showAddEditModel} onClose={handleClose} fullWidth maxWidth="md">
             <DialogTitle sx={{ fontWeight: 'bold' }}>

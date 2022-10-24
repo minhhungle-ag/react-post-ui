@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
 import React from 'react'
 
-export function NotFound(props) {
+export default function NotFound(props) {
   return (
     <Stack
       direction="row"
