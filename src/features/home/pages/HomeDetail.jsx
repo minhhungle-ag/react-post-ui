@@ -1,26 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Container, Divider, Stack, Typography } from '@mui/material'
+import { Box, Button, Container, Divider, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Loading } from '../../../components/Common/Loading'
 import { PostInfo } from '../../../components/Common/PostInfo'
-import { DEFAULT_THUMBNAIL } from '../../../constants/common'
+import { CURRENT_LIMIT, DEFAULT_THUMBNAIL } from '../../../constants/common'
+import { useComments } from '../../../hooks/comments'
 import { usePost } from '../../../hooks/post'
 import { usePosts } from '../../../hooks/posts'
+import { useUser } from '../../../hooks/user'
 import { randomNumberInRange } from '../../../utils/common'
+import CommentForm from '../components/CommentForm'
+import CommentList from '../components/CommentList'
 import { RecentPostList } from '../components/RecentPostList'
 
 export function HomeDetail() {
   const [params, setParams] = useState({
     page: 1,
-    limit: 6,
+    limit: CURRENT_LIMIT,
+  })
+
+  const [commentParams, setCommentParams] = useState({
+    page: 1,
+    limit: CURRENT_LIMIT,
   })
   const { postId } = useParams()
   const navigate = useNavigate()
 
+  const userId = localStorage.getItem('userId')
+
+  const { user } = useUser(userId)
   const { post, isLoading } = usePost(postId)
   const { postList, pagination } = usePosts({
     ...params,
+  })
+
+  const {
+    commentList,
+    pagination: commentPagination,
+    addMutation,
+  } = useComments({
+    ...commentParams,
+    postId: postId,
   })
 
   useEffect(() => {
@@ -36,6 +57,16 @@ export function HomeDetail() {
   }, [post])
 
   const newPostList = postList?.filter((item) => item.id !== postId)
+
+  async function handleFormSubmit(formValues) {
+    const data = {
+      postId: postId,
+      name: formValues.name,
+      comment: formValues.comment,
+    }
+
+    await addMutation.mutateAsync(data)
+  }
 
   return isLoading ? (
     <Loading />
@@ -93,6 +124,41 @@ export function HomeDetail() {
                 {post?.description}
               </Typography>
             </Stack>
+
+            <Divider />
+
+            <Stack spacing={3}>
+              <Typography variant="h5" fontWeight={500}>
+                Comments
+              </Typography>
+
+              <Box sx={{ width: { xs: '100%', md: 1 / 2 } }}>
+                <CommentForm onFormSubmit={handleFormSubmit} username={user?.fullName} />
+              </Box>
+
+              <Box>
+                <CommentList commentList={commentList || []} />
+              </Box>
+
+              {commentList?.length < commentPagination?.total && (
+                <Box maxWidth={200}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() =>
+                      setCommentParams({
+                        ...commentParams,
+                        limit: commentParams.limit + CURRENT_LIMIT,
+                      })
+                    }
+                  >
+                    Load more...
+                  </Button>
+                </Box>
+              )}
+            </Stack>
+
+            <Divider />
 
             {Array.isArray(newPostList) && newPostList.length > 0 && (
               <Box>

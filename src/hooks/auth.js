@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query'
-import { authApi } from '../api/auth'
+import { authApi } from '../api/authApi'
 
 export function useAuth() {
   const queryKey = ['/user']

@@ -35,7 +35,7 @@ export function MyPosts() {
   const { user, isLoading } = useUser(userId)
   const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts({
     ...params,
-    author: user?.fullname,
+    author: user?.fullName,
   })
 
   function handleClose() {

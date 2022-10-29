@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query'
-import { postApi } from '../api/post'
+import { postApi } from '../api/postApi'
 
 export function usePost(postId) {
   const queryKey = ['/posts', postId]

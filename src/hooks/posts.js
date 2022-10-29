@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { postApi } from '../api/post'
+import { postApi } from '../api/postApi'
 
 export function usePosts(params) {
   const queryKey = ['/posts', params]

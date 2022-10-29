@@ -12,7 +12,7 @@ const emailRegex =
   /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
 const schema = yup.object({
-  fullname: yup.string().required(),
+  fullName: yup.string().required(),
   email: yup.string().required().matches(emailRegex),
   password: yup.string().required(),
   avatar: yup.string().required(),
@@ -28,7 +28,7 @@ export function SignUpForm({ onFormSubmit }) {
     defaultValues: {
       email: '',
       password: '',
-      fullname: '',
+      fullName: '',
 
       description: '',
       avatar: '',
@@ -55,7 +55,7 @@ export function SignUpForm({ onFormSubmit }) {
     <Box component="form" noValidate onSubmit={handleSubmit(handleFormSubmit)}>
       <AvatarField control={control} name="avatar" width={80} />
 
-      <InputField control={control} name="fullname" label="Full name" />
+      <InputField control={control} name="fullName" label="Full name" />
 
       <SelectField
         control={control}

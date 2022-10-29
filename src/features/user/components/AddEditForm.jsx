@@ -21,7 +21,7 @@ export function AddEditForm({ user, post, onFormSubmit, onCancelClick }) {
 
   const { control, handleSubmit } = useForm({
     defaultValues: post || {
-      author: user.fullname,
+      author: user.fullName,
       avatar: user.avatar,
       title: '',
       imageUrl: '',

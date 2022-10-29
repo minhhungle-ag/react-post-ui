@@ -21,7 +21,7 @@ export function Info({ user, onBtnClick }) {
         <Stack spacing={3} sx={{ p: 3 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="h4" textTransform="uppercase">
-              {user?.fullname}
+              {user?.fullName}
             </Typography>
           </Stack>
 
