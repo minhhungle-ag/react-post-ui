@@ -7,6 +7,8 @@ import { Loading } from '../../../components/Common/Loading'
 import { usePosts } from '../../../hooks/posts'
 import CardBanner from '../components/CardBanner'
 import { CardList } from '../components/CardList'
+import GalleryList from '../components/GalleryList'
+import MotionBanner from '../components/MotionBanner'
 
 const currentPost = {
   title: 'Top Hikes In Australia',
@@ -52,7 +54,7 @@ export function HomePage(props) {
         </Container>
       </Box>
 
-      <Box sx={{ py: 8 }}>
+      <Box sx={{ my: 8 }}>
         <Container>
           <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: 6 }}>
             Latest post
@@ -73,6 +75,19 @@ export function HomePage(props) {
               siblingCount={matches ? 1 : 0}
             />
           </Stack>
+        </Container>
+      </Box>
+
+      <Box sx={{ my: 8 }}>
+        <MotionBanner />
+      </Box>
+      <Box sx={{ my: 8 }}>
+        <Container>
+          <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: 6 }}>
+            Gallery list
+          </Typography>
+
+          <GalleryList />
         </Container>
       </Box>
     </Box>

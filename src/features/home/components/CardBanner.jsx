@@ -6,7 +6,7 @@ import { DEFAULT_THUMBNAIL } from '../../../constants/common'
 
 function CardBanner({ post }) {
   return (
-    <Box sx={{ p: 5, bgcolor: 'primary.main', maxWidth: 900, margin: '0 auto' }}>
+    <Box sx={{ p: 5, borderRadius: 1, maxWidth: 900, margin: '0 auto', bgcolor: 'primary.main' }}>
       <Typography variant="h4" fontWeight={400} color="white">
         Featured Post
       </Typography>
