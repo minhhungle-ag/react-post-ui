@@ -10,11 +10,13 @@ import {
   Pagination,
   Stack,
   Typography,
+  useMediaQuery,
 } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Loading } from '../../../components/Common/Loading'
+import { SearchBox } from '../../../components/FormField/Searchbox'
 import { usePosts } from '../../../hooks/posts'
 import { useUser } from '../../../hooks/user'
 import { AddEditForm } from '../components/AddEditForm'
@@ -31,6 +33,7 @@ export function MyPosts() {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
+  const matches = useMediaQuery('(min-width:414px)')
 
   const { user, isLoading } = useUser(userId)
   const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts({
@@ -41,6 +44,14 @@ export function MyPosts() {
   function handleClose() {
     setSelectedPost(null)
     setShowAddEditModel(false)
+  }
+
+  function handleSearchChange(value) {
+    setParams({
+      ...params,
+      searchKey: value,
+      page: 1,
+    })
   }
 
   async function handleRemovePost(post) {
@@ -111,6 +122,10 @@ export function MyPosts() {
               </Button>
             </Stack>
 
+            <Box sx={{ my: { xs: 1, md: 2 } }}>
+              <SearchBox onSearchChange={handleSearchChange} />
+            </Box>
+
             <MyPostList
               postList={postList || []}
               onCardClick={(postId) => navigate(`/home/${postId}`)}
@@ -133,6 +148,7 @@ export function MyPosts() {
                 variant="outlined"
                 shape="rounded"
                 page={params.page}
+                siblingCount={matches ? 1 : 0}
               />
             </Stack>
           </Box>

@@ -1,4 +1,4 @@
-import { Box, Pagination, Stack, Typography } from '@mui/material'
+import { Box, Pagination, Stack, Typography, useMediaQuery } from '@mui/material'
 import { Container } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -27,11 +27,12 @@ export function HomePage(props) {
   const [latedPost, setLatestPost] = useState(currentPost)
   const [params, setParams] = useState({
     page: 1,
-    limit: 6,
+    limit: 12,
   })
 
   const { postList, pagination, isLoading } = usePosts(params)
   const navigate = useNavigate()
+  const matches = useMediaQuery('(min-width:414px)')
 
   useEffect(() => {
     if (postList && postList[0]) {
@@ -69,6 +70,7 @@ export function HomePage(props) {
               variant="outlined"
               shape="rounded"
               page={params.page}
+              siblingCount={matches ? 1 : 0}
             />
           </Stack>
         </Container>
