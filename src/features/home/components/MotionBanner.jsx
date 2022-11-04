@@ -9,7 +9,7 @@ function MotionBanner(props) {
       sx={{
         height: 600,
         backgroundImage: `url(${banner})`,
-        backgroundPosition: 'center',
+        backgroundPosition: 'bottom',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundAttachment: 'fixed',

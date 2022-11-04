@@ -20,7 +20,7 @@ function GalleryList(props) {
   return (
     <Stack direction="row" flexWrap="wrap" sx={{ mx: -1 }}>
       {galleryList.map((item, idx) => (
-        <Box key={idx} sx={{ width: { xs: '100%', sm: 1 / 2, md: 1 / 3 }, cursor: 'pointer' }}>
+        <Box key={idx} sx={{ width: { xs: '100%', sm: 1 / 2, md: 1 / 6 }, cursor: 'pointer' }}>
           <Box sx={{ p: 1 }}>
             <Box
               boxShadow={3}

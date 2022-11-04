@@ -29,7 +29,7 @@ export function HomePage(props) {
   const [latedPost, setLatestPost] = useState(currentPost)
   const [params, setParams] = useState({
     page: 1,
-    limit: 12,
+    limit: 6,
   })
 
   const { postList, pagination, isLoading } = usePosts(params)
@@ -82,13 +82,13 @@ export function HomePage(props) {
         <MotionBanner />
       </Box>
       <Box sx={{ my: 8 }}>
-        <Container>
-          <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: 6 }}>
-            Gallery list
-          </Typography>
+        <Typography variant="h3" textAlign="center" fontWeight={500} sx={{ mb: 6 }}>
+          Gallery list
+        </Typography>
 
+        <Box sx={{ p: 2 }}>
           <GalleryList />
-        </Container>
+        </Box>
       </Box>
     </Box>
   )
