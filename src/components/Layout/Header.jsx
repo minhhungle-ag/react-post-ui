@@ -66,7 +66,7 @@ export function Header({ postList, onFieldChange, onChange }) {
   return (
     <AppBar position="sticky">
       <Container>
-        <Toolbar disableGutters sx={{ py: { xs: 1.5, md: 2 } }}>
+        <Toolbar disableGutters sx={{ py: { xs: 1, sm: 2, md: 3 } }}>
           <Link to="/home">
             <Stack direction="row" alignItems="center" spacing={1.5}>
               <SouthAmericaIcon sx={{ fontSize: 58 }} />
