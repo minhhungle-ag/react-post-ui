@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material'
+import dayjs from 'dayjs'
 import React from 'react'
 
 function CommentList({ commentList }) {
@@ -11,6 +12,10 @@ function CommentList({ commentList }) {
             <Typography variant="body1" fontWeight={500}>
               {item.name}
             </Typography>
+            <Typography variant="body2" color="grey" fontStyle="italic">
+              {dayjs(item.createdAt).format('MMM DD, YYYY')}
+            </Typography>
+
             <Typography variant="body2">{item.comment}</Typography>
           </Box>
         ))}

@@ -14,6 +14,7 @@ import * as React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import { useUser } from '../../hooks/user'
+import MainSearch from '../FormField/MainSearch'
 
 const settings = [
   { label: 'Profile', link: 'profile' },
@@ -25,7 +26,7 @@ const authSettings = [
   { label: 'SignUp', link: 'signUp' },
 ]
 
-export function Header() {
+export function Header({ postList, onFieldChange, onChange }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
   const navigate = useNavigate()
@@ -88,6 +89,16 @@ export function Header() {
               </Box>
             </Stack>
           </Link>
+
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <MainSearch
+              postList={postList || []}
+              onFieldChange={(value) => onFieldChange?.(value)}
+              onChange={(values) => onChange?.(values)}
+            />
+          </Box>
 
           <Box sx={{ flexGrow: 1 }} />
 

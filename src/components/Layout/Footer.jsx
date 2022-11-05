@@ -68,9 +68,9 @@ export function Footer(props) {
 
           <Box sx={{ width: { xs: '100%', sm: 1 / 3 }, my: 2 }}>
             <Typography variant="body1" textAlign="justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, pariatur
-              reprehenderit quasi iste amet alias dolor ducimus non obcaecati temporibus quibusdam
-              eum. Illo unde nisi, voluptas harum quam at doloribus.
+              On The Trail is the best place to find interesting news, stories and reviews about
+              destinations from all over the world. We are passionate about travel and do our best
+              to bring you the highest quality of travel content.
             </Typography>
           </Box>
 
