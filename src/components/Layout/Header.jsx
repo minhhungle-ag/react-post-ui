@@ -108,7 +108,7 @@ export function Header({ postList, onSearchChange, onChange }) {
               zIndex={1}
               sx={{
                 '& *': {
-                  color: 'white',
+                  color: 'white !important',
                 },
               }}
               width={300}
