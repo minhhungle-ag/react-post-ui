@@ -26,7 +26,7 @@ const authSettings = [
   { label: 'SignUp', link: 'signUp' },
 ]
 
-export function Header({ postList, onFieldChange, onChange }) {
+export function Header({ postList, onSearchChange, onChange }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null)
 
   const navigate = useNavigate()
@@ -92,12 +92,33 @@ export function Header({ postList, onFieldChange, onChange }) {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <MainSearch
-              postList={postList || []}
-              onFieldChange={(value) => onFieldChange?.(value)}
-              onChange={(values) => onChange?.(values)}
-            />
+          <Box
+            position="relative"
+            width={300}
+            height={56}
+            sx={{
+              display: {
+                xs: 'none',
+                sm: 'block',
+              },
+            }}
+          >
+            <Box
+              position="absolute"
+              zIndex={1}
+              sx={{
+                '& *': {
+                  color: 'white',
+                },
+              }}
+              width={300}
+            >
+              <MainSearch
+                postList={postList || []}
+                onSearchChange={(value) => onSearchChange?.(value)}
+                onChange={(values) => onChange?.(values)}
+              />
+            </Box>
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />

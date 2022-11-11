@@ -1,89 +1,155 @@
-import * as React from 'react'
-import TextField from '@mui/material/TextField'
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete'
-import { alpha } from '@mui/material'
+import { Search } from '@mui/icons-material'
+import {
+  alpha,
+  Avatar,
+  Box,
+  Chip,
+  ClickAwayListener,
+  Collapse,
+  IconButton,
+  InputAdornment,
+  List,
+  ListItemButton,
+  Stack,
+  Typography,
+} from '@mui/material'
 
-const filter = createFilterOptions()
+import debounce from 'lodash/debounce'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { InputField } from './InputField'
 
-export default function MainSearch({ postList, onFieldChange, onChange }) {
-  const [value, setValue] = React.useState(null)
+/* eslint-disable-next-line */
 
-  function handleInputChange(e) {
+export function MainSearch({ postList, onSearchChange, onChange }) {
+  const [open, setOpen] = useState(false)
+
+  const [selectedValue, setSelectedValue] = useState('')
+
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      searchKey: '',
+    },
+  })
+
+  const handleSearchChange = debounce((e) => {
     const value = e.target.value
+    onSearchChange?.(value)
+    setSelectedValue(value)
+    setOpen(Boolean(value))
+  }, 600)
 
-    onFieldChange?.(value)
+  function handleChange(option) {
+    onChange?.(option)
+    setOpen(false)
   }
 
-  function handleChange(event, newValue) {
-    if (typeof newValue === 'string') {
-      setValue({
-        title: newValue,
-      })
-    } else if (newValue && newValue.title) {
-      // Create a new value from the user input
-      setValue({
-        title: newValue.title,
-      })
-    } else {
-      setValue(newValue)
+  function handleFormSubmit(values) {
+    if (values && values.searchKey) {
+      onChange?.(values.searchKey)
     }
-
-    onChange?.(newValue)
+    setOpen(false)
   }
 
   return (
-    <Autocomplete
-      value={value}
-      onChange={handleChange}
-      filterOptions={(options, params) => {
-        const filtered = filter(options, params)
-
-        const { inputValue } = params
-        // Suggest the creation of a new value
-        const isExisting = options.some((option) => inputValue === option.title)
-        if (inputValue !== '' && !isExisting) {
-          filtered.push({
-            inputValue,
-            title: `Search "${inputValue}"`,
-          })
-        }
-
-        return filtered
-      }}
-      selectOnFocus
-      clearOnBlur
-      handleHomeEndKeys
-      id="free-solo-with-text-demo"
-      options={(Array.isArray(postList) && postList) || []}
-      getOptionLabel={(option) => {
-        // Value selected with enter, right from the input
-        if (typeof option === 'string') {
-          return option
-        }
-        // Add "xxx" option created dynamically
-        if (option.inputValue) {
-          return option.inputValue
-        }
-        // Regular option
-        return option.title
-      }}
-      renderOption={(props, option) => <li {...props}>{option.title}</li>}
+    <Box
+      width="100%"
+      component="form"
+      onSubmit={handleSubmit(handleFormSubmit)}
       sx={{
-        width: 300,
+        borderRadius: '4px',
 
-        '.MuiInputBase-root *': {
-          color: (theme) => alpha(theme.palette.common.white, 0.7),
+        bgcolor: (theme) => (open ? alpha(theme.palette.common.black, 0.5) : 'none'),
+
+        '.MuiFormControl-root.MuiTextField-root': {
+          p: 1,
+          m: 0,
         },
 
-        '.MuiInputBase-root fieldset': {
-          border: '1px solid !important',
-          borderColor: (theme) => `${alpha(theme.palette.common.white, 0.15)} !important`,
+        '& fieldset': {
+          borderColor: (theme) => `${alpha(theme.palette.common.white, 0.25)} !important`,
         },
       }}
-      freeSolo
-      renderInput={(params) => (
-        <TextField {...params} placeholder="Search..." onChange={handleInputChange} />
-      )}
-    />
+    >
+      <InputField
+        className="input-field"
+        name="searchKey"
+        type="search"
+        placeholder="Search"
+        variant="outlined"
+        control={control}
+        onChange={handleSearchChange}
+        InputProps={{
+          'aria-label': 'search',
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton type="submit" size="small" color="inherit">
+                <Search />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <ClickAwayListener onClickAway={() => setOpen(false)}>
+        <Collapse
+          in={open}
+          timeout="auto"
+          unmountOnExit
+          sx={{
+            overflow: 'hidden',
+          }}
+        >
+          <List
+            component="div"
+            disablePadding
+            sx={{
+              maxHeight: '200px',
+              overflow: 'auto',
+            }}
+          >
+            {Array.isArray(postList) &&
+              postList.map((option, idx) => (
+                <ListItemButton sx={{ pl: 2 }} key={idx} onClick={() => handleChange(option)}>
+                  <Avatar sx={{ mr: 1 }} alt="logo" src={option?.avatar} />
+
+                  <Typography variant="subtitle1" sx={{ flexGrow: 1 }} color="white">
+                    {option?.title}
+                  </Typography>
+
+                  {option?.isLive === 'active' && (
+                    <Chip sx={{ borderRadius: '4px', height: 20 }} color="error" label="Live" />
+                  )}
+                </ListItemButton>
+              ))}
+
+            <ListItemButton
+              sx={{ pl: 2 }}
+              onClick={() =>
+                handleChange({
+                  inputValue: selectedValue,
+                  value: selectedValue,
+                  label: selectedValue,
+                })
+              }
+            >
+              <Stack
+                justifyContent="center"
+                alignItems="center"
+                sx={{ marginRight: '12px', cursor: 'pointer' }}
+              >
+                <Search />
+              </Stack>
+
+              <Typography variant="subtitle1" sx={{ flexGrow: 1 }} color="white">
+                {selectedValue}
+              </Typography>
+            </ListItemButton>
+          </List>
+        </Collapse>
+      </ClickAwayListener>
+    </Box>
   )
 }
+
+export default MainSearch

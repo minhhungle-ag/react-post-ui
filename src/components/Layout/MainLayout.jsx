@@ -16,15 +16,33 @@ export function MainLayout({ children }) {
   }
 
   function handleSearchChange(values) {
+    if (!values) return
+
+    if (typeof values === 'string') {
+      navigate(`/home/search/${values.toLowerCase()}`)
+      return
+    }
+
+    const postId = values.id || ''
+    const inputValue = values.inputValue || ''
+
+    if (!postId) {
+      navigate(`/home/search/${inputValue}`)
+    }
+
     if (values?.id) {
-      navigate(`/home/${values?.id}`)
+      navigate(`/home/post-detail/${postId}`)
     }
     setSearchKey('')
   }
 
   return (
     <Stack width="100%" minHeight="100vh">
-      <Header postList={postList} onFieldChange={handleFieldChange} onChange={handleSearchChange} />
+      <Header
+        postList={postList}
+        onSearchChange={handleFieldChange}
+        onChange={handleSearchChange}
+      />
       <Box flexGrow={1}>{children}</Box>
       <Footer />
     </Stack>

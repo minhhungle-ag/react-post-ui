@@ -62,7 +62,7 @@ export function HomePage(props) {
 
           <CardList
             postList={postList || []}
-            onCardClick={(postId) => navigate(`/home/${postId}`)}
+            onCardClick={(postId) => navigate(`/home/post-detail/${postId}`)}
           />
 
           <Stack direction="row" alignItems="center" justifyContent="center" sx={{ mt: 6 }}>
