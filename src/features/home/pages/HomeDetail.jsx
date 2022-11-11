@@ -174,7 +174,7 @@ export function HomeDetail() {
 
                 <RecentPostList
                   postList={newPostList}
-                  onCardClick={(postId) => navigate(`/home/${postId}`)}
+                  onCardClick={(postId) => navigate(`/home/post-detail/${postId}`)}
                   columnLimit={4}
                 />
               </Box>
