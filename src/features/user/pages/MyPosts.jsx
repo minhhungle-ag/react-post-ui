@@ -146,7 +146,7 @@ export function MyPosts() {
 
           <MyPostList
             postList={postList || []}
-            onCardClick={(postId) => navigate(`/home/${postId}`)}
+            onCardClick={(postId) => navigate(`/home/post-detail/${postId}`)}
             onEdit={(post) => {
               setSelectedPost(post)
               setShowAddEditModel(true)
