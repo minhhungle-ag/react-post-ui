@@ -92,85 +92,102 @@ export function MyPosts() {
     <Loading />
   ) : (
     <Box>
-      <Box height={300}>
+      <Stack position="relative" height={300} justifyContent="center" alignItems="center">
         <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
           width="100%"
           height="100%"
           component="img"
           alt="banner"
-          src="https://picsum.photos/1368/300?blur=2"
+          src="https://picsum.photos/id/2/1368/300?blur=5"
           sx={{ objectFit: 'cover' }}
-          onError={(e) => (e.target.src = 'https://picsum.photos/id/2/1368/300?blur=2')}
         />
-      </Box>
 
-      <Box sx={{ my: { xs: 4, md: 8 } }}>
-        <Container>
-          <Box>
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-              sx={{ my: { xs: 2, md: 3 } }}
-            >
-              <Typography variant="h4" textAlign="center" fontWeight={500}>
-                My latest posts
-              </Typography>
+        <Typography
+          variant="h3"
+          textAlign="center"
+          fontWeight={500}
+          position="relative"
+          zIndex={2}
+          color="white"
+        >
+          My latest posts
+        </Typography>
+      </Stack>
 
-              <Button variant="contained" color="primary" onClick={() => setShowAddEditModel(true)}>
-                Add new post
-              </Button>
-            </Stack>
-
-            <Box sx={{ my: { xs: 1, md: 2 } }}>
+      <Container>
+        <Box sx={{ py: 1.5 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            flexWrap="wrap"
+            justifyContent="space-between"
+            sx={{ my: { xs: 2, md: 3 } }}
+          >
+            <Box sx={{ my: { xs: 1, md: 2 }, width: { xs: '100%', sm: 'auto' } }}>
               <SearchBox onSearchChange={handleSearchChange} />
             </Box>
 
-            <MyPostList
-              postList={postList || []}
-              onCardClick={(postId) => navigate(`/home/${postId}`)}
-              onEdit={(post) => {
-                setSelectedPost(post)
-                setShowAddEditModel(true)
-              }}
-              onRemove={handleRemovePost}
+            <Box sx={{ width: { xs: '100%', sm: 'auto' } }}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={() => setShowAddEditModel(true)}
+              >
+                Add new post
+              </Button>
+            </Box>
+          </Stack>
+
+          <MyPostList
+            postList={postList || []}
+            onCardClick={(postId) => navigate(`/home/${postId}`)}
+            onEdit={(post) => {
+              setSelectedPost(post)
+              setShowAddEditModel(true)
+            }}
+            onRemove={handleRemovePost}
+          />
+
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ my: { xs: 2, md: 6 } }}
+          >
+            <Pagination
+              count={pagination?.total_page}
+              onChange={(event, page) => setParams({ ...params, page: page })}
+              variant="outlined"
+              shape="rounded"
+              page={params.page}
+              siblingCount={matches ? 1 : 0}
             />
+          </Stack>
+        </Box>
 
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="center"
-              sx={{ my: { xs: 2, md: 6 } }}
-            >
-              <Pagination
-                count={pagination?.total_page}
-                onChange={(event, page) => setParams({ ...params, page: page })}
-                variant="outlined"
-                shape="rounded"
-                page={params.page}
-                siblingCount={matches ? 1 : 0}
-              />
-            </Stack>
-          </Box>
+        <Dialog open={showAddEditModel} onClose={handleClose} fullWidth maxWidth="md">
+          <DialogTitle sx={{ fontWeight: 'bold' }}>
+            {selectedPost ? 'Edit post' : 'Add new post'}
+          </DialogTitle>
 
-          <Dialog open={showAddEditModel} onClose={handleClose} fullWidth maxWidth="md">
-            <DialogTitle sx={{ fontWeight: 'bold' }}>
-              {selectedPost ? 'Edit post' : 'Add new post'}
-            </DialogTitle>
+          <Divider />
 
-            <Divider />
-
-            <DialogContent>
-              <AddEditForm
-                post={selectedPost}
-                user={user}
-                onFormSubmit={handleFormSubmit}
-                onCancelClick={handleClose}
-              />
-            </DialogContent>
-          </Dialog>
-        </Container>
-      </Box>
+          <DialogContent>
+            <AddEditForm
+              post={selectedPost}
+              user={user}
+              onFormSubmit={handleFormSubmit}
+              onCancelClick={handleClose}
+            />
+          </DialogContent>
+        </Dialog>
+      </Container>
     </Box>
   )
 }
