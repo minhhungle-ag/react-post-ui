@@ -51,7 +51,7 @@ export function Sidebar({ open, onClose }) {
 
         {token ? (
           <NavLink
-            to="/"
+            to="/home"
             className={({ isActive }) => (isActive ? 'active' : '')}
             style={{ textDecoration: 'none' }}
           >
