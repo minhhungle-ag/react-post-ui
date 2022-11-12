@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 import { menuList } from '../../constants/common'
 
 export function Sidebar({ open, onClose }) {
+  const token = localStorage.getItem('token')
+
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box
@@ -46,6 +48,87 @@ export function Sidebar({ open, onClose }) {
             </Box>
           </NavLink>
         ))}
+
+        {token ? (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+
+              mb: 0.5,
+              p: 1,
+              borderRadius: '4px',
+
+              color: 'grey.500',
+              backgroundColor: 'white',
+
+              '&:hover': {
+                backgroundColor: 'grey.50',
+              },
+            }}
+            onClick={() => {
+              localStorage.setItem('token', '')
+              localStorage.setItem('userId', '')
+            }}
+          >
+            <Box>Logout</Box>
+          </Box>
+        ) : (
+          <>
+            <NavLink
+              to={'/auth/login'}
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              style={{ textDecoration: 'none' }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+
+                  mb: 0.5,
+                  p: 1,
+                  borderRadius: '4px',
+
+                  color: 'grey.500',
+                  backgroundColor: 'white',
+
+                  '&:hover': {
+                    backgroundColor: 'grey.50',
+                  },
+                }}
+                onClick={() => onClose?.()}
+              >
+                <Box>Login</Box>
+              </Box>
+            </NavLink>
+
+            <NavLink
+              to={'/auth/signup'}
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              style={{ textDecoration: 'none' }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+
+                  mb: 0.5,
+                  p: 1,
+                  borderRadius: '4px',
+
+                  color: 'grey.500',
+                  backgroundColor: 'white',
+
+                  '&:hover': {
+                    backgroundColor: 'grey.50',
+                  },
+                }}
+              >
+                <Box>Sign Up</Box>
+              </Box>
+            </NavLink>
+          </>
+        )}
       </Box>
     </Drawer>
   )

@@ -16,11 +16,11 @@ const galleryList = [
   'https://static.parastorage.com/services/instagram-cdn/1.691.0/assets/ig-templates-accounts/Editor/Travelling%20Blog/12.jpg',
 ]
 
-function GalleryList(props) {
+function GalleryList({onImageClick}) {
   return (
     <Stack direction="row" flexWrap="wrap" sx={{ mx: -1 }}>
       {galleryList.map((item, idx) => (
-        <Box key={idx} sx={{ width: { xs: '100%', sm: 1 / 2, md: 1 / 6 }, cursor: 'pointer' }}>
+        <Box key={idx} sx={{ width: { xs: '100%', sm: 1 / 2, md: 1 / 6 }, cursor: 'pointer' }} onClick={() => onImageClick?.(item)} >
           <Box sx={{ p: 1 }}>
             <Box
               boxShadow={3}

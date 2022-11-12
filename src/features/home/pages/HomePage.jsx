@@ -1,4 +1,15 @@
-import { Box, Pagination, Stack, Typography, useMediaQuery } from '@mui/material'
+import { Close } from '@mui/icons-material'
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  Pagination,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 import { Container } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -27,10 +38,13 @@ const currentPost = {
 
 export function HomePage(props) {
   const [latedPost, setLatestPost] = useState(currentPost)
+  const [selectedImage, setSelectedImage] = useState('')
   const [params, setParams] = useState({
     page: 1,
     limit: 6,
   })
+
+  const [open, setOpen] = React.useState(false)
 
   const { postList, pagination, isLoading } = usePosts(params)
   const navigate = useNavigate()
@@ -41,6 +55,15 @@ export function HomePage(props) {
       setLatestPost(postList[0])
     }
   }, [postList])
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  function handleImageClick(img) {
+    setSelectedImage(img)
+    setOpen(true)
+  }
 
   return isLoading ? (
     <Loading />
@@ -87,9 +110,26 @@ export function HomePage(props) {
         </Typography>
 
         <Box sx={{ p: 2 }}>
-          <GalleryList />
+          <GalleryList onImageClick={handleImageClick} />
         </Box>
       </Box>
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>
+          <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <Typography variant="h6">Light box</Typography>
+            <IconButton edge="end" color="inherit" aria-label="menu" onClick={() => setOpen(false)}>
+              <Close size="large" />
+            </IconButton>
+          </Stack>
+        </DialogTitle>
+
+        <DialogContent>
+          <Box>
+            <Box component="img" alt="" src={selectedImage} width="100%" />
+          </Box>
+        </DialogContent>
+      </Dialog>
     </Box>
   )
 }
