@@ -12,7 +12,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Loading } from '../../../components/Common/Loading'
@@ -80,10 +80,11 @@ export function MyPosts() {
     handleClose()
   }
 
-  if (!token) {
-    navigate('/auth/login')
-    return null
-  }
+  useEffect(() => {
+    if (!token) {
+      navigate('/auth/login')
+    }
+  }, [token])
 
   return isLoading ? (
     <Loading />

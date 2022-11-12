@@ -50,33 +50,40 @@ export function Sidebar({ open, onClose }) {
         ))}
 
         {token ? (
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-
-              mb: 0.5,
-              p: 1,
-              borderRadius: '4px',
-
-              color: 'grey.500',
-              backgroundColor: 'white',
-
-              '&:hover': {
-                backgroundColor: 'grey.50',
-              },
-            }}
-            onClick={() => {
-              localStorage.setItem('token', '')
-              localStorage.setItem('userId', '')
-            }}
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+            style={{ textDecoration: 'none' }}
           >
-            <Box>Logout</Box>
-          </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+
+                mb: 0.5,
+                p: 1,
+                borderRadius: '4px',
+
+                color: 'grey.500',
+                backgroundColor: 'white',
+
+                '&:hover': {
+                  backgroundColor: 'grey.50',
+                },
+              }}
+              onClick={() => {
+                onClose?.()
+                localStorage.setItem('token', '')
+                localStorage.setItem('userId', '')
+              }}
+            >
+              <Box>Logout</Box>
+            </Box>
+          </NavLink>
         ) : (
           <>
             <NavLink
-              to={'/auth/login'}
+              to="/auth/login"
               className={({ isActive }) => (isActive ? 'active' : '')}
               style={{ textDecoration: 'none' }}
             >
