@@ -35,11 +35,14 @@ export function SwanCard({
     >
       <Box sx={{ width: { xs: '100%', md: 1 / 2 } }}>
         <Box
-          width="100%"
-          height="100%"
           sx={{
+            width: '100%',
+            height: '100%',
+            minHeight: { xs: 200, sm: 300, md: 350 },
+
             backgroundImage: `url(${imageUrl || DEFAULT_THUMBNAIL})`,
             backgroundSize: 'cover',
+            backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
           }}
           onError={(event) => (event.target.src = DEFAULT_THUMBNAIL)}
