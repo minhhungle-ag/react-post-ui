@@ -36,10 +36,7 @@ export function MyPosts() {
   const matches = useMediaQuery('(min-width:414px)')
 
   const { user, isLoading } = useUser(userId)
-  const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts({
-    ...params,
-    author: user?.fullName,
-  })
+  const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts(params)
 
   function handleClose() {
     setSelectedPost(null)

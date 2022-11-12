@@ -17,7 +17,7 @@ export function Login(props) {
           localStorage.setItem('userId', response.data.userId)
 
           toast.success('Login success')
-          navigate('/')
+          navigate('/admin')
 
           return
         }

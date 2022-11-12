@@ -35,6 +35,8 @@ export function HomeDetail() {
     ...params,
   })
 
+  console.log('postList: ', postList)
+
   const {
     commentList,
     pagination: commentPagination,
@@ -50,7 +52,7 @@ export function HomeDetail() {
       setParams((params) => ({
         ...params,
         page: randomPage,
-        author: post?.author,
+        author: post.author,
         recentId: post.id,
       }))
     }

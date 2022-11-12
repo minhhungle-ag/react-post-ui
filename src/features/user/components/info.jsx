@@ -55,9 +55,11 @@ export function Info({ user, onBtnClick }) {
             </Typography>
           </Stack>
 
-          <Button fullWidth variant="contained" color="primary" onClick={() => onBtnClick?.()}>
-            Go to my post
-          </Button>
+          {onBtnClick && (
+            <Button fullWidth variant="contained" color="primary" onClick={() => onBtnClick?.()}>
+              Go to my post
+            </Button>
+          )}
         </Stack>
       </Box>
     </Stack>

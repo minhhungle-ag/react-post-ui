@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom'
 import { useSearch } from '../../hooks/search'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { Sidebar } from './SideBar'
 
 export function MainLayout({ children }) {
+  const [openDrawer, setOpenDrawer] = useState(false)
+
   const [searchKey, setSearchKey] = useState('')
   const { postList } = useSearch({ searchKey: searchKey })
 
@@ -42,7 +45,11 @@ export function MainLayout({ children }) {
         postList={postList}
         onSearchChange={handleFieldChange}
         onChange={handleSearchChange}
+        onToggleDrawer={() => setOpenDrawer((x) => !x)}
       />
+
+      <Sidebar open={openDrawer} onClose={() => setOpenDrawer(false)} />
+
       <Box flexGrow={1}>{children}</Box>
       <Footer />
     </Stack>

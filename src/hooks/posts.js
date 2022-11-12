@@ -5,7 +5,7 @@ export function usePosts(params) {
   const queryKey = ['/posts', params]
   const queryClient = useQueryClient()
 
-  const { data, isLoading, error } = useQuery(queryKey, () => postApi.getAll(params))
+  const { data, isLoading, error, refetch } = useQuery(queryKey, () => postApi.getAll(params))
 
   const addMutation = useMutation((data) => postApi.add(data), {
     onSuccess: () => queryClient.invalidateQueries(queryKey),
@@ -22,6 +22,7 @@ export function usePosts(params) {
   return {
     isLoading,
     error,
+    refetch,
     postList: data?.data,
     pagination: data?.pagination,
     addMutation,
