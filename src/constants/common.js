@@ -24,4 +24,5 @@ export const USER = {
 export const menuList = [
   { label: 'Home', link: 'home' },
   { label: 'About', link: 'about' },
+  { label: 'Post Management', link: 'post-management' },
 ]

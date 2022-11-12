@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Navigate to="home" />} />
         <Route path="home/*" element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="admin" element={<MyPosts />} />
+        <Route path="post-management" element={<MyPosts />} />
         <Route path="auth/*" element={<Auth />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

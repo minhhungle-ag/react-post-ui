@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { Close } from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -7,15 +8,16 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
+  IconButton,
   Pagination,
   Stack,
   Typography,
   useMediaQuery,
 } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { Loading } from '../../../components/Common/Loading'
+import { SwanCard } from '../../../components/Common/SwanCard'
 import { SearchBox } from '../../../components/FormField/Searchbox'
 import { usePosts } from '../../../hooks/posts'
 import { useUser } from '../../../hooks/user'
@@ -24,21 +26,21 @@ import MyPostList from '../components/MyPostList'
 
 export function MyPosts() {
   const [showAddEditModel, setShowAddEditModel] = useState(false)
+  const [showDetailModel, setShowDetailModel] = useState(false)
   const [selectedPost, setSelectedPost] = useState(null)
   const [params, setParams] = useState({
     page: 1,
     limit: 6,
   })
 
-  const navigate = useNavigate()
-  const token = localStorage.getItem('token')
+  // const token = localStorage.getItem('token')
   const userId = localStorage.getItem('userId')
   const matches = useMediaQuery('(min-width:414px)')
 
   const { user, isLoading } = useUser(userId)
   const { postList, pagination, removeMutation, addMutation, updateMutation } = usePosts(params)
 
-  function handleClose() {
+  function handleCloseAddEditModel() {
     setSelectedPost(null)
     setShowAddEditModel(false)
   }
@@ -67,7 +69,7 @@ export function MyPosts() {
         }
         await updateMutation.mutateAsync(data)
         toast.success('Edit post success')
-        handleClose()
+        handleCloseAddEditModel()
       } catch (error) {
         console.log(error)
       }
@@ -77,14 +79,29 @@ export function MyPosts() {
 
     await addMutation.mutateAsync(formValues)
     toast.success('Add new post success')
-    handleClose()
+    handleCloseAddEditModel()
   }
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/auth/login')
-    }
-  }, [token])
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate('/auth/login')
+  //   }
+  // }, [token])
+
+  function handleEditPost(post) {
+    setSelectedPost(post)
+    setShowAddEditModel(true)
+  }
+
+  function handleDetailClick(post) {
+    setSelectedPost(post)
+    setShowDetailModel(true)
+  }
+
+  function handleCloseDetailModel() {
+    setSelectedPost(null)
+    setShowDetailModel(false)
+  }
 
   return isLoading ? (
     <Loading />
@@ -113,7 +130,7 @@ export function MyPosts() {
           zIndex={2}
           color="white"
         >
-          My latest posts
+          Posts management
         </Typography>
       </Stack>
 
@@ -144,11 +161,8 @@ export function MyPosts() {
 
           <MyPostList
             postList={postList || []}
-            onCardClick={(postId) => navigate(`/home/post-detail/${postId}`)}
-            onEdit={(post) => {
-              setSelectedPost(post)
-              setShowAddEditModel(true)
-            }}
+            onDetailClick={handleDetailClick}
+            onEdit={handleEditPost}
             onRemove={handleRemovePost}
           />
 
@@ -169,7 +183,7 @@ export function MyPosts() {
           </Stack>
         </Box>
 
-        <Dialog open={showAddEditModel} onClose={handleClose} fullWidth maxWidth="md">
+        <Dialog open={showAddEditModel} onClose={handleCloseAddEditModel} fullWidth maxWidth="md">
           <DialogTitle sx={{ fontWeight: 'bold' }}>
             {selectedPost ? 'Edit post' : 'Add new post'}
           </DialogTitle>
@@ -181,7 +195,38 @@ export function MyPosts() {
               post={selectedPost}
               user={user}
               onFormSubmit={handleFormSubmit}
-              onCancelClick={handleClose}
+              onCancelClick={handleCloseAddEditModel}
+            />
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={showDetailModel} onClose={handleCloseDetailModel} fullWidth maxWidth="md">
+          <DialogTitle sx={{ fontWeight: 'bold' }}>
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              <Typography variant="h6">Post detail</Typography>
+              <IconButton
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                onClick={handleCloseDetailModel}
+              >
+                <Close size="large" />
+              </IconButton>
+            </Stack>
+          </DialogTitle>
+
+          <Divider />
+
+          <DialogContent>
+            <SwanCard
+              imageUrl={selectedPost?.imageUrl}
+              avatar={selectedPost?.avatar}
+              title={selectedPost?.title}
+              description={selectedPost?.description}
+              short_description={selectedPost?.short_description}
+              showAllTitle
+              showAllDesc
+              showAllShortDesc
             />
           </DialogContent>
         </Dialog>

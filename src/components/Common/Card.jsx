@@ -7,11 +7,10 @@ import { PostInfo } from './PostInfo'
 
 export function Card({ title, short_description, imageUrl, author, createdAt, avatar, action }) {
   return (
-    <Box
+    <Stack
       boxShadow={3}
       sx={{
         borderRadius: '4px',
-
         cursor: 'pointer',
         overflow: 'hidden',
         '&:hover': {
@@ -50,6 +49,6 @@ export function Card({ title, short_description, imageUrl, author, createdAt, av
 
         {action}
       </Stack>
-    </Box>
+    </Stack>
   )
 }

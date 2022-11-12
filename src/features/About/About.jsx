@@ -1,9 +1,10 @@
 import { Box, Container, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { toast } from 'react-toastify'
+import { Info } from '../../components/Common/info'
 import { USER } from '../../constants/common'
 import { useContact } from '../../hooks/contact'
-import { Info } from '../user/components/info'
+
 import { ContactForm } from './components/ContactForm'
 
 export function About() {
