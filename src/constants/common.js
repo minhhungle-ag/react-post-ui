@@ -17,5 +17,6 @@ export const USER = {
 export const menuList = [
   { label: 'Home', link: 'home' },
   { label: 'About', link: 'about' },
+  { label: 'Contact', link: 'contact' },
   { label: 'Post Management', link: 'post-management' },
 ]
