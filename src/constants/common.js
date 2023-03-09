@@ -1,12 +1,5 @@
 export const DEFAULT_THUMBNAIL = 'https://picsum.photos/id/279/1368/400'
-export const API_URL = 'https://post-ui-server.herokuapp.com/api'
-//'https://heroku-post-ui-server-production.up.railway.app/api'
-
-//'https://posts-ui-server.onrender.com/api'
-
-// 'https://heroku-post-ui-server-production.up.railway.app/api'
-//'https://heroku-post-ui-api.herokuapp.com/api'
-//https://heroku-post-ui.herokuapp.com/api
+export const API_URL = 'https://heroku-post-ui-server-production-8b8c.up.railway.app/api'
 
 export const CURRENT_LIMIT = 6
 export const USER = {
